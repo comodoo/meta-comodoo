@@ -8,4 +8,4 @@ LICENSE = "MIT"
 
 inherit core-image
 
-IMAGE_INSTALL += "x11vnc"
+IMAGE_INSTALL += "x11vnc firefox"
