@@ -10,37 +10,28 @@ Dependencies
 This layer depends on:
 
   URI: git://git.openembedded.org/bitbake
-  branch: master
+  branch: krogoth
 
   URI: git://git.openembedded.org/openembedded-core
   layers: meta
-  branch: master
+  branch: krogoth
 
-  URI: git://git.yoctoproject.org/xxxx
-  layers: xxxx
-  branch: master
+  URI: git://git.openembedded.org/meta-openembedded
+  layers: meta-oe, meta-gnome
+  branch: krogoth-next
 
-
-Patches
-=======
-
-Please submit any patches against the comodoo layer to the
-xxxx mailing list (xxxx@zzzz.org) and cc: the maintainer:
-
-Maintainer: XXX YYYYYY <xxx.yyyyyy@zzzzz.com>
+  URI: git://github.com/OSSystems/meta-browser.git
+  branch: krogoth
 
 
 Table of Contents
 =================
 
   I. Adding the comodoo layer to your build
- II. Misc
 
 
 I. Adding the comodoo layer to your build
 =================================================
-
---- replace with specific instructions for the comodoo layer ---
 
 In order to use this layer, you need to make the build system aware of
 it.
@@ -50,15 +41,50 @@ yocto build tree, you can add it to the build system by adding the
 location of the comodoo layer to bblayers.conf, along with any
 other layers needed. e.g.:
 
-  BBLAYERS ?= " \
+BBLAYERS ?= " \
     /path/to/yocto/meta \
     /path/to/yocto/meta-poky \
     /path/to/yocto/meta-yocto-bsp \
+    /path/to/yocto/meta-openembedded/meta-oe \
+    /path/to/yocto/meta-openembedded/meta-gnome \
+    /path/to/yocto/meta-browser \
     /path/to/yocto/meta-comodoo \
-    "
+  "
 
+Now, let see with some more detail, how to build an image of the
+comodoo project for a Raspberry Pi 3:
 
-II. Misc
-========
-
---- replace with specific information about the comodoo layer ---
+1. git clone git://git.yoctoproject.org/poky
+   cd poky/
+   git checkout -b krogoth origin/krogoth
+2. git clone git://git.yoctoproject.org/meta-raspberrypi
+   # No need to checkout another branch, only master branch has raspberry3.conf
+3. git clone git://git.openembedded.org/meta-openembedded
+   cd meta-openembedded/
+   git checkout -b krogoth-next origin/krogoth-next
+   cd ..
+4. git clone git://github.com/OSSystems/meta-browser.git
+   cd meta-browser/
+   git checkout -b krogoth origin/krogoth
+   cd ..
+5. git clone git://github.com/indisoluble/meta-comodoo.git
+   # Or git clone git@github.com:indisoluble/meta-comodoo.git
+6. source oe-init-build-env
+7. cd conf/
+8.nano bblayers.conf
+   # Edit var BBLAYERS as follows:
+BBLAYERS ?= " \
+    /path/to/yocto/meta \
+    /path/to/yocto/meta-poky \
+    /path/to/yocto/meta-yocto-bsp \
+    /path/to/yocto/meta-raspberrypi \
+    /path/to/yocto/meta-openembedded/meta-oe \
+    /path/to/yocto/meta-openembedded/meta-gnome \
+    /path/to/yocto/meta-browser \
+    /path/to/yocto/meta-comodoo \
+  "
+8. nano local.conf
+   # Add following line to the end of the file:
+MACHINE ?= "raspberrypi3"
+9. cd ..
+10. bitbake comodoo-image-sato
