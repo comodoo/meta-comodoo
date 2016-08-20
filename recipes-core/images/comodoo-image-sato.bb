@@ -7,3 +7,5 @@ IMAGE_FEATURES += "splash package-management x11-base x11-sato ssh-server-dropbe
 LICENSE = "MIT"
 
 inherit core-image
+
+IMAGE_INSTALL += "x11vnc"
