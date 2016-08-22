@@ -51,14 +51,14 @@ BBLAYERS ?= " \
     /path/to/yocto/meta-comodoo \
   "
 
-Now, let see with some more detail, how to build an image of the
-comodoo project for a Raspberry Pi 3:
+Now, let see with some more detail how to build the comodoo image
+for a Raspberry Pi 3:
 
 1. git clone git://git.yoctoproject.org/poky
    cd poky/
    git checkout -b krogoth origin/krogoth
 2. git clone git://git.yoctoproject.org/meta-raspberrypi
-   # No need to checkout another branch, only master branch has raspberry3.conf
+   # No need to checkout another branch, only master branch has raspberrypi3.conf
 3. git clone git://git.openembedded.org/meta-openembedded
    cd meta-openembedded/
    git checkout -b krogoth-next origin/krogoth-next
@@ -73,7 +73,7 @@ comodoo project for a Raspberry Pi 3:
 7. cd conf/
 8.nano bblayers.conf
    # Edit var BBLAYERS as follows:
-BBLAYERS ?= " \
+BBLAYERS ?= " ng 
     /path/to/yocto/meta \
     /path/to/yocto/meta-poky \
     /path/to/yocto/meta-yocto-bsp \
@@ -88,3 +88,32 @@ BBLAYERS ?= " \
 MACHINE ?= "raspberrypi3"
 9. cd ..
 10. bitbake comodoo-image-sato
+
+During the building process, you might see some of the following
+messages:
+
+- WARNING: userland-git-r5 do_package_qa: QA Issue: /usr/bin/dtoverlay-post
+  contained in package userland requires /bin/bash, but no providers found in
+  RDEPENDS_userland? [file-rdeps] 
+userland-git is part of the meta-raspberrypi layer and although bash is not in
+RDEPENDS_userland, nevertheless it is included in the generated image. So,
+do not worry for this message.
+
+- ERROR: Taskhash mismatch 97eb15ad80a7746b7bb6a9c61915c014 verses
+  a0c7246dc6a884bdea88db870610218a for
+  /path/to/yocto/meta-comodoo/recipes-core/images/comodoo-image-sato.bb.do_image_rpi_sdimg
+Although this is an error, the rpi_sdimg file is created in /path/to/yocto/build/tmp/deploy/images/raspberrypi3/.
+If not, just run again  'bitbake comodoo-image-sato'.
+
+Also, the first image generated with this procedure might not work. In some
+cases, after transferring the image to the SD card, inserting it in the raspberrypi
+and powering it up, when we connect the ethernet cable to the port, the LEDs
+in it do not light. Without a connection, there is not much we can do with the
+raspberrypi. My recomendation in this case is:
+
+1. cd /path/to/yocto/build
+2. rm -fr tmp/
+3. bitbake comodoo-image-sato
+
+This time, the building process will be a lot faster and the new image generated
+in /path/to/yocto/build/tmp/deploy/images/raspberrypi3/ should be ok.
