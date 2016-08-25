@@ -17,7 +17,7 @@ This layer depends on:
   branch: krogoth
 
   URI: git://git.openembedded.org/meta-openembedded
-  layers: meta-oe, meta-gnome
+  layers: meta-xfce, meta-python, meta-oe, meta-gnome
   branch: krogoth-next
 
   URI: git://github.com/OSSystems/meta-browser.git
@@ -27,10 +27,11 @@ This layer depends on:
 Table of Contents
 =================
 
-  I. Adding the comodoo layer to your build
+  I. Adding the comodoo layer to your build (sato)
+  II. Adding the comodoo layer to your build (xfce)
 
 
-I. Adding the comodoo layer to your build
+I. Adding the comodoo layer to your build (sato)
 =================================================
 
 In order to use this layer, you need to make the build system aware of
@@ -117,3 +118,48 @@ raspberrypi. My recomendation in this case is:
 
 This time, the building process will be a lot faster and the new image generated
 in /path/to/yocto/build/tmp/deploy/images/raspberrypi3/ should be ok.
+
+
+II. Adding the comodoo layer to your build (xfce)
+=================================================
+
+The steps described before explain how to build the image for comodoo
+project with sato window manager. Now, let see how to do the same with
+xfce:
+
+1. git clone git://git.yoctoproject.org/poky
+   cd poky/
+   git checkout -b krogoth origin/krogoth
+2. git clone git://git.yoctoproject.org/meta-raspberrypi
+   # No need to checkout another branch, only master branch has raspberrypi3.conf
+3. git clone git://git.openembedded.org/meta-openembedded
+   cd meta-openembedded/
+   git checkout -b krogoth-next origin/krogoth-next
+   cd ..
+4. git clone git://github.com/OSSystems/meta-browser.git
+   cd meta-browser/
+   git checkout -b krogoth origin/krogoth
+   cd ..
+5. git clone git://github.com/indisoluble/meta-comodoo.git
+   # Or git clone git@github.com:indisoluble/meta-comodoo.git
+6. source oe-init-build-env
+7. cd conf/
+8.nano bblayers.conf
+   # Edit var BBLAYERS as follows:
+BBLAYERS ?= "
+    /path/to/yocto/meta \
+    /path/to/yocto/meta-poky \
+    /path/to/yocto/meta-yocto-bsp \
+    /path/to/yocto/meta-raspberrypi \
+    /path/to/yocto/meta-openembedded/meta-xfce \
+    /path/to/yocto/meta-openembedded/meta-python \
+    /path/to/yocto/meta-openembedded/meta-oe \
+    /path/to/yocto/meta-openembedded/meta-gnome \
+    /path/to/yocto/meta-browser \
+    /path/to/yocto/meta-comodoo \
+  "
+8. nano local.conf
+   # Add following line to the end of the file:
+MACHINE ?= "raspberrypi3"
+9. cd ..
+10. bitbake comodoo-image-xfce
