@@ -29,7 +29,7 @@ Table of Contents
 
   I. Adding the comodoo layer to your build (sato)
   II. Adding the comodoo layer to your build (xfce)
-
+  III. Framebuffer in RaspberryPi
 
 I. Adding the comodoo layer to your build (sato)
 =================================================
@@ -163,3 +163,15 @@ BBLAYERS ?= "
 MACHINE ?= "raspberrypi3"
 9. cd ..
 10. bitbake comodoo-image-xfce
+
+
+III. Framebuffer in RaspberryPi
+=================================================
+
+Also, notice the file
+/path/to/yocto/meta-comodoo/recipes-bsp/bootfiles/rpi-config_git.bbappend.
+This file point to the a located in
+git://github.com/indisoluble/RPi-config.git and its only purpose is to
+force the screen size to 1024x768, which is quite convenient when we
+connect with a VNC client to the RaspberryPi but there is not a display
+plugged in the HDMI port.
