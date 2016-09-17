@@ -17,21 +17,21 @@ This layer depends on:
   branch: krogoth
 
   URI: git://git.openembedded.org/meta-openembedded
-  layers: meta-xfce, meta-python, meta-oe, meta-gnome
-  branch: krogoth-next
-
-  URI: git://github.com/OSSystems/meta-browser.git
+  layers: meta-oe, meta-gnome
   branch: krogoth
+
+  URI: git://github.com/mozilla-japan/meta-browser.git
+  branch: firefox-45.0esr
 
 
 Table of Contents
 =================
 
-  I. Adding the comodoo layer to your build (sato)
-  II. Adding the comodoo layer to your build (xfce)
+  I. Adding the comodoo layer to your build
+  II. Build Configuration for RaspberryPi 3
   III. Framebuffer in RaspberryPi
 
-I. Adding the comodoo layer to your build (sato)
+I. Adding the comodoo layer to your build
 =================================================
 
 In order to use this layer, you need to make the build system aware of
@@ -55,24 +55,23 @@ BBLAYERS ?= " \
 Now, let see with some more detail how to build the comodoo image
 for a Raspberry Pi 3:
 
-1. git clone git://git.yoctoproject.org/poky
+1. [OPTIONAL] sudo apt-get install autoconf2.13
+2. git clone git://git.yoctoproject.org/poky
    cd poky/
    git checkout -b krogoth origin/krogoth
-2. git clone git://git.yoctoproject.org/meta-raspberrypi
+3. git clone git://git.yoctoproject.org/meta-raspberrypi
    # No need to checkout another branch, only master branch has raspberrypi3.conf
-3. git clone git://git.openembedded.org/meta-openembedded
+4. git clone git://git.openembedded.org/meta-openembedded
    cd meta-openembedded/
-   git checkout -b krogoth-next origin/krogoth-next
-   cd ..
-4. git clone git://github.com/OSSystems/meta-browser.git
-   cd meta-browser/
    git checkout -b krogoth origin/krogoth
    cd ..
-5. git clone git://github.com/indisoluble/meta-comodoo.git
+5. git clone git://github.com/mozilla-japan/meta-browser.git
+   # Default brach is already firefox-45.0esr
+6. git clone git://github.com/indisoluble/meta-comodoo.git
    # Or git clone git@github.com:indisoluble/meta-comodoo.git
-6. source oe-init-build-env
-7. cd conf/
-8.nano bblayers.conf
+7. source oe-init-build-env
+8. cd conf/
+9.nano bblayers.conf
    # Edit var BBLAYERS as follows:
 BBLAYERS ?= " ng 
     /path/to/yocto/meta \
@@ -84,29 +83,18 @@ BBLAYERS ?= " ng
     /path/to/yocto/meta-browser \
     /path/to/yocto/meta-comodoo \
   "
-8. nano local.conf
+10. nano local.conf
    # Add following line to the end of the file:
 MACHINE ?= "raspberrypi3"
-9. cd ..
-10. bitbake comodoo-image-sato
 
-During the building process, you might see some of the following
-messages:
+PREFERRED_PROVIDER_virtual/libgl = "mesa"
+PREFERRED_PROVIDER_virtual/libgles2 = "mesa"
+PREFERRED_PROVIDER_virtual/egl = "mesa"
+PREFERRED_PROVIDER_virtual/mesa = "mesa"
+11. cd ..
+12. bitbake comodoo-image-firefox
 
-- WARNING: userland-git-r5 do_package_qa: QA Issue: /usr/bin/dtoverlay-post
-  contained in package userland requires /bin/bash, but no providers found in
-  RDEPENDS_userland? [file-rdeps] 
-userland-git is part of the meta-raspberrypi layer and although bash is not in
-RDEPENDS_userland, nevertheless it is included in the generated image. So,
-do not worry for this message.
-
-- ERROR: Taskhash mismatch 97eb15ad80a7746b7bb6a9c61915c014 verses
-  a0c7246dc6a884bdea88db870610218a for
-  /path/to/yocto/meta-comodoo/recipes-core/images/comodoo-image-sato.bb.do_image_rpi_sdimg
-Although this is an error, the rpi_sdimg file is created in /path/to/yocto/build/tmp/deploy/images/raspberrypi3/.
-If not, just run again  'bitbake comodoo-image-sato'.
-
-Also, the first image generated with this procedure might not work. In some
+The first image generated with this procedure might not work. In some
 cases, after transferring the image to the SD card, inserting it in the raspberrypi
 and powering it up, when we connect the ethernet cable to the port, the LEDs
 in it do not light. Without a connection, there is not much we can do with the
@@ -114,55 +102,32 @@ raspberrypi. My recomendation in this case is:
 
 1. cd /path/to/yocto/build
 2. rm -fr tmp/
-3. bitbake comodoo-image-sato
+3. bitbake comodoo-image-firefox
 
 This time, the building process will be a lot faster and the new image generated
 in /path/to/yocto/build/tmp/deploy/images/raspberrypi3/ should be ok.
 
 
-II. Adding the comodoo layer to your build (xfce)
+II. Build Configuration for RaspberryPi 3
 =================================================
 
-The steps described before explain how to build the image for comodoo
-project with sato window manager. Now, let see how to do the same with
-xfce:
-
-1. git clone git://git.yoctoproject.org/poky
-   cd poky/
-   git checkout -b krogoth origin/krogoth
-2. git clone git://git.yoctoproject.org/meta-raspberrypi
-   # No need to checkout another branch, only master branch has raspberrypi3.conf
-3. git clone git://git.openembedded.org/meta-openembedded
-   cd meta-openembedded/
-   git checkout -b krogoth-next origin/krogoth-next
-   cd ..
-4. git clone git://github.com/OSSystems/meta-browser.git
-   cd meta-browser/
-   git checkout -b krogoth origin/krogoth
-   cd ..
-5. git clone git://github.com/indisoluble/meta-comodoo.git
-   # Or git clone git@github.com:indisoluble/meta-comodoo.git
-6. source oe-init-build-env
-7. cd conf/
-8.nano bblayers.conf
-   # Edit var BBLAYERS as follows:
-BBLAYERS ?= "
-    /path/to/yocto/meta \
-    /path/to/yocto/meta-poky \
-    /path/to/yocto/meta-yocto-bsp \
-    /path/to/yocto/meta-raspberrypi \
-    /path/to/yocto/meta-openembedded/meta-xfce \
-    /path/to/yocto/meta-openembedded/meta-python \
-    /path/to/yocto/meta-openembedded/meta-oe \
-    /path/to/yocto/meta-openembedded/meta-gnome \
-    /path/to/yocto/meta-browser \
-    /path/to/yocto/meta-comodoo \
-  "
-8. nano local.conf
-   # Add following line to the end of the file:
-MACHINE ?= "raspberrypi3"
-9. cd ..
-10. bitbake comodoo-image-xfce
+BB_VERSION        = "1.30.0"
+BUILD_SYS         = "x86_64-linux"
+NATIVELSBSTRING   = "universal"
+TARGET_SYS        = "arm-poky-linux-gnueabi"
+MACHINE           = "raspberrypi3"
+DISTRO            = "poky"
+DISTRO_VERSION    = "2.1.1"
+TUNE_FEATURES     = "arm armv7ve vfp thumb neon vfpv4 callconvention-hard cortexa7"
+TARGET_FPU        = "hard"
+meta              
+meta-poky         
+meta-yocto-bsp    = "krogoth:8c69f7d56cbd496aa01ba0738675a170826a536b"
+meta-raspberrypi  = "master:cc64d6324d1543f009f0c010d720e74b7cb9f5d5"
+meta-oe           
+meta-gnome        = "krogoth:895b25b387cae428c38990f4d2747603ee9dc92d"
+meta-browser      = "firefox-45.0esr:14199ac070905b101e7bb0919748986c33374649"
+meta-comodoo      = "krogoth-firefox:b5251c27e682c1988876eeef7f8895f33ad0e845"
 
 
 III. Framebuffer in RaspberryPi
