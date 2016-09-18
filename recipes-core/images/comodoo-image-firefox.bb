@@ -8,4 +8,4 @@ DECRIPTION = "A very basic X11 image with: \
 "
 
 IMAGE_FEATURES_append = " ssh-server-dropbear"
-IMAGE_INSTALL_append = " x11vnc firefox"
+IMAGE_INSTALL_append = " x11vnc firefox firefox-addon-rkiosk"
