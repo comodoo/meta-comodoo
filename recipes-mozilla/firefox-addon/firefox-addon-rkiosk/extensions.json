@@ -1,0 +1,165 @@
+{
+    "addons": [
+        {
+            "aboutURL": null,
+            "active": true,
+            "appDisabled": false,
+            "applyBackgroundUpdates": 1,
+            "bootstrap": true,
+            "defaultLocale": {
+                "creator": "Mozilla",
+                "description": "Web sharing for Firefox",
+                "homepageURL": null,
+                "name": "Firefox Hello Beta"
+            },
+            "descriptor": "/usr/lib/firefox-45.3.0/browser/features/loop@mozilla.org.xpi",
+            "foreignInstall": false,
+            "hasBinaryComponents": false,
+            "icon64URL": null,
+            "iconURL": null,
+            "icons": {},
+            "id": "loop@mozilla.org",
+            "installDate": 1474116801000,
+            "internalName": null,
+            "locales": [],
+            "location": "app-system-defaults",
+            "multiprocessCompatible": false,
+            "optionsType": null,
+            "optionsURL": null,
+            "releaseNotesURI": null,
+            "seen": true,
+            "size": 4109706,
+            "skinnable": false,
+            "softDisabled": false,
+            "sourceURI": null,
+            "strictCompatibility": false,
+            "syncGUID": "GgfJDDnXTe1R",
+            "targetApplications": [
+                {
+                    "id": "{ec8030f7-c20a-464f-9b0e-13a3a9e97384}",
+                    "maxVersion": "45.*",
+                    "minVersion": "45.0"
+                },
+                {
+                    "id": "xpcshell@tests.mozilla.org",
+                    "maxVersion": "10",
+                    "minVersion": "0"
+                }
+            ],
+            "targetPlatforms": [],
+            "type": "extension",
+            "updateDate": 1474116801000,
+            "updateKey": null,
+            "updateURL": null,
+            "userDisabled": false,
+            "version": "1.1.14",
+            "visible": true
+        },
+        {
+            "aboutURL": null,
+            "active": true,
+            "appDisabled": false,
+            "applyBackgroundUpdates": 1,
+            "defaultLocale": {
+                "contributors": [
+                    "Mozilla Contributors"
+                ],
+                "creator": "Mozilla",
+                "description": "The default theme.",
+                "homepageURL": null,
+                "name": "Default"
+            },
+            "descriptor": "/usr/lib/firefox-45.3.0/browser/extensions/{972ce4c6-7e08-4474-a285-3208198ce6fd}.xpi",
+            "foreignInstall": false,
+            "hasBinaryComponents": false,
+            "icon64URL": null,
+            "iconURL": null,
+            "icons": {
+                "32": "icon.png",
+                "48": "icon.png"
+            },
+            "id": "{972ce4c6-7e08-4474-a285-3208198ce6fd}",
+            "installDate": 1474116800000,
+            "internalName": "classic/1.0",
+            "locales": [],
+            "location": "app-global",
+            "optionsType": null,
+            "optionsURL": null,
+            "releaseNotesURI": null,
+            "seen": true,
+            "size": 5028,
+            "skinnable": true,
+            "softDisabled": false,
+            "sourceURI": null,
+            "strictCompatibility": true,
+            "syncGUID": "FMtxyI0LXJ8P",
+            "targetApplications": [
+                {
+                    "id": "{ec8030f7-c20a-464f-9b0e-13a3a9e97384}",
+                    "maxVersion": "45.3.0",
+                    "minVersion": "45.3.0"
+                }
+            ],
+            "targetPlatforms": [],
+            "type": "theme",
+            "updateDate": 1474116800000,
+            "updateKey": null,
+            "updateURL": null,
+            "userDisabled": false,
+            "version": "45.3.0",
+            "visible": true
+        },
+        {
+            "aboutURL": null,
+            "active": true,
+            "appDisabled": false,
+            "applyBackgroundUpdates": 1,
+            "bootstrap": false,
+            "defaultLocale": {
+                "creator": "Kimmo Heinaaro",
+                "description": "RKiosk (Real Kiosk), fullscreen kiosk mode: all menus, keys etc. disabled",
+                "homepageURL": null,
+                "name": "R-kiosk"
+            },
+            "descriptor": "/usr/lib/firefox-45.3.0/browser/extensions/{4D498D0A-05AD-4fdb-97B5-8A0AABC1FC5B}",
+            "foreignInstall": true,
+            "hasBinaryComponents": false,
+            "icon64URL": null,
+            "iconURL": null,
+            "icons": {},
+            "id": "{4D498D0A-05AD-4fdb-97B5-8A0AABC1FC5B}",
+            "installDate": 1474227137000,
+            "internalName": null,
+            "locales": [],
+            "location": "app-global",
+            "multiprocessCompatible": false,
+            "optionsType": null,
+            "optionsURL": null,
+            "releaseNotesURI": null,
+            "seen": true,
+            "signedState": 1,
+            "size": 16134,
+            "skinnable": false,
+            "softDisabled": false,
+            "sourceURI": null,
+            "strictCompatibility": false,
+            "syncGUID": "PbpqJfL6GR3t",
+            "targetApplications": [
+                {
+                    "id": "{ec8030f7-c20a-464f-9b0e-13a3a9e97384}",
+                    "maxVersion": "6.*",
+                    "minVersion": "2.0"
+                }
+            ],
+            "targetPlatforms": [],
+            "type": "extension",
+            "updateDate": 1474227137000,
+            "updateKey": null,
+            "updateURL": null,
+            "userDisabled": false,
+            "version": "0.9.0.1-signed.1-signed",
+            "visible": true
+        }
+    ],
+    "schemaVersion": 17
+}
