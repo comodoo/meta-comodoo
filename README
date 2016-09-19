@@ -127,7 +127,7 @@ meta-raspberrypi  = "master:cc64d6324d1543f009f0c010d720e74b7cb9f5d5"
 meta-oe           
 meta-gnome        = "krogoth:895b25b387cae428c38990f4d2747603ee9dc92d"
 meta-browser      = "firefox-45.0esr:14199ac070905b101e7bb0919748986c33374649"
-meta-comodoo      = "krogoth-firefox:b4214e6f23ca0f4e349948950998cec13d004261"
+meta-comodoo      = "krogoth-firefox:e397aee7136f2d77392e321a65513ca53903ba64"
 
 
 III. Framebuffer in RaspberryPi
