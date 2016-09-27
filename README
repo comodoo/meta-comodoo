@@ -30,6 +30,7 @@ Table of Contents
   I. Adding the comodoo layer to your build
   II. Build Configuration for RaspberryPi 3
   III. Framebuffer in RaspberryPi
+  IV. HOWTO launch the kiosk
 
 I. Adding the comodoo layer to your build
 =================================================
@@ -127,7 +128,7 @@ meta-raspberrypi  = "master:cc64d6324d1543f009f0c010d720e74b7cb9f5d5"
 meta-oe           
 meta-gnome        = "krogoth:895b25b387cae428c38990f4d2747603ee9dc92d"
 meta-browser      = "firefox-45.0esr:14199ac070905b101e7bb0919748986c33374649"
-meta-comodoo      = "krogoth-firefox:113e8fd5d7d6c1a479fb3c75227695a2af19ad74"
+meta-comodoo      = "master:113e8fd5d7d6c1a479fb3c75227695a2af19ad74"
 
 
 III. Framebuffer in RaspberryPi
@@ -140,3 +141,15 @@ git://github.com/indisoluble/RPi-config.git and its only purpose is to
 force the screen size to 1024x768, which is quite convenient when we
 connect with a VNC client to the RaspberryPi but there is not a display
 plugged in the HDMI port.
+
+
+IV. HOWTO launch the kiosk
+=================================================
+
+1. Switch on the RaspberryPi.
+2. Connect by ssh to the RaspberryPi.
+3. On the ssh terminal, launch 'x11vnc &'.
+4. When the VNC server is ready, open a VNC client on your host computer.
+5. Back on the ssh terminal, execute 'comodoo.sh &'.
+6. On the VNC client window, Firefox will appear on kiosk mode and
+   it will load the Odoo login page.
