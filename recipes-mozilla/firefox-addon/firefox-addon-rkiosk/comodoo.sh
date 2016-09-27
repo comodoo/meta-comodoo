@@ -13,5 +13,6 @@ if [ ! -d  ${OWN_COMODOO_DIR} ]; then
 fi
 
 OWN_FIREFOX_PROFILE_DIR="${OWN_COMODOO_DIR}/firefox-45.3.0/profile/"
+URL="$1"
 
-firefox --display=:0 --profile ${OWN_FIREFOX_PROFILE_DIR}
+firefox --display=:0 --profile ${OWN_FIREFOX_PROFILE_DIR} ${URL}
