@@ -1,10 +1,7 @@
-DEPENDS = "mozilla-devscripts-native"
-
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=4d92cd373abda3937c2bc47fbc49d690"
 
-PV = "20161001"
-PR = "r2"
+DEPENDS = "mozilla-devscripts-native"
 
 RKIOSK_XPI = "addon-r-kiosk-latest.xpi"
 SRC_URI = "https://addons.mozilla.org/firefox/downloads/latest/r-kiosk/${RKIOSK_XPI}"

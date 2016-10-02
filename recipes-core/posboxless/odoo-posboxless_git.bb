@@ -4,16 +4,16 @@ LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=4d92cd373abda3937c2bc47fbc49d
 PV = "20161001"
 PR = "r1"
 
-S = "${WORKDIR}/git"
-
-SRCREV = "1a0d173b9af787a4acc515f153e3d5d78f358487"
 SRC_URI = "git://github.com/odoo/odoo.git;protocol=git;branch=9.0"
+SRCREV = "1a0d173b9af787a4acc515f153e3d5d78f358487"
 
-ODOO_SRCDIR = "${prefix}/src/odoo"
+S = "${WORKDIR}/git"
 
 do_compile() {
     :
 }
+
+ODOO_SRCDIR = "${prefix}/src/odoo"
 
 do_install() {
     ADDONS_DIR="addons"
