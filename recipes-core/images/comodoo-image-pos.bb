@@ -7,7 +7,7 @@ IMAGE_INSTALL_append = " \
     postgresql \
     postgresql-client \
     \ 
-    odoo-posboxless \
+    comodoo-posboxless \
     python-pyserial \
     python-pyusb \
     python-lxml \

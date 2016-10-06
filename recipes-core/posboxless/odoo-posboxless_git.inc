@@ -1,9 +1,6 @@
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=4d92cd373abda3937c2bc47fbc49d690"
 
-PV = "20161001"
-PR = "r1"
-
 SRC_URI = "git://github.com/odoo/odoo.git;protocol=git;branch=9.0"
 SRCREV = "1a0d173b9af787a4acc515f153e3d5d78f358487"
 
