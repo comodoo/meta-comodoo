@@ -1,0 +1,41 @@
+From 37ccd6e64a7f8e22d69a2d56a68f8e586f3145bf Mon Sep 17 00:00:00 2001
+From: Enrique de la Torre <indisoluble_dev@me.com>
+Date: Sat, 27 Aug 2016 00:48:37 +0200
+Subject: [PATCH] Disable overscan & set framebuffer
+
+---
+ config.txt | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/config.txt b/config.txt
+index 16db254..ecc2830 100644
+--- a/config.txt
++++ b/config.txt
+@@ -366,7 +366,7 @@
+ ##     0        Overscan Enabled (Default)
+ ##     1        Overscan Disabled
+ ##
+-#disable_overscan=1
++disable_overscan=1
+ 
+ ################################################################################
+ ##  Framebuffer Video Settings
+@@ -376,13 +376,13 @@
+ ##     Console framebuffer width in pixels. Default is display width minus
+ ##     overscan.
+ ##
+-#framebuffer_width=0
++framebuffer_width=1024
+ 
+ ## framebuffer_height
+ ##     Console framebuffer height in pixels. Default is display height minus
+ ##     overscan.
+ ##
+-#framebuffer_height=0
++framebuffer_height=600
+ 
+ ## framebuffer_depth
+ ##     Console framebuffer depth in bits per pixel.
+-- 
+2.7.4
+
