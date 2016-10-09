@@ -28,6 +28,7 @@ IMAGE_INSTALL_append = " \
     python-docutils \
     python-evdev \
     \
+    comodoo-network-configuration \
     eca-web \
     connman \ 
 "

@@ -36,3 +36,5 @@ do_install_append() {
 FILES_${PN} += "${COMODOO_FIREFOX_DATADIR} \
                 ${bindir}/${COMODOO-KIOSK_PY} \
                "
+
+RDEPENDS_${PN} += "python"
