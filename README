@@ -16,22 +16,26 @@ This layer depends on:
   layers: meta
   branch: krogoth
 
-  URI: git://git.openembedded.org/meta-openembedded
-  layers: meta-oe, meta-gnome, meta-ruby, meta-python
-  branch: krogoth
-
-  URI: git://github.com/meta-qt5/meta-qt5.git
-  branch: krogoth
+  URI: git://github.com/mozilla-japan/meta-browser.git
+  branch: firefox-45.0esr
 
   URI: git://git.yoctoproject.org/meta-cloud-services
   layers: meta-openstack
   branch: master
 
-  URI: git://github.com/sarnold/meta-small-arm-extra.git
+  URI: git://git.yoctoproject.org/meta-eca
+  layers: meta-eca
   branch: master
 
-  URI: git://github.com/mozilla-japan/meta-browser.git
-  branch: firefox-45.0esr
+  URI: git://git.openembedded.org/meta-openembedded
+  layers: meta-gnome, meta-oe, meta-python, meta-ruby
+  branch: krogoth
+
+  URI: git://github.com/meta-qt5/meta-qt5.git
+  branch: krogoth
+
+  URI: git://github.com/sarnold/meta-small-arm-extra.git
+  branch: master
 
 
 Table of Contents
@@ -39,8 +43,8 @@ Table of Contents
 
   I. Adding the comodoo layer to your build
   II. Build Configuration for RaspberryPi 3
-  III. Framebuffer in RaspberryPi
-  IV. HOWTO launch the kiosk
+  III. HOWTO launch the kiosk
+  IV. Know issues during WIFI configuration
 
 I. Adding the comodoo layer to your build
 =================================================
@@ -57,15 +61,16 @@ BBLAYERS ?= " \
     /path/to/yocto/meta \
     /path/to/yocto/meta-poky \
     /path/to/yocto/meta-yocto-bsp \
-    /path/to/yocto/meta-openembedded/meta-oe \
-    /path/to/yocto/meta-openembedded/meta-gnome \
-    /path/to/yocto/meta-openembedded/meta-ruby \
-    /path/to/yocto/meta-openembedded/meta-python \
-    /path/to/yocto/meta-qt5 \
-    /path/to/yocto/meta-cloud-services/meta-openstack \
-    /path/to/yocto/meta-small-arm-extra \
     /path/to/yocto/meta-browser \
+    /path/to/yocto/meta-cloud-services/meta-openstack \
     /path/to/yocto/meta-comodoo \
+    /path/to/yocto/meta-eca/meta-eca \
+    /path/to/yocto/meta-openembedded/meta-gnome \
+    /path/to/yocto/meta-openembedded/meta-oe \
+    /path/to/yocto/meta-openembedded/meta-python \
+    /path/to/yocto/meta-openembedded/meta-ruby \
+    /path/to/yocto/meta-qt5 \
+    /path/to/yocto/meta-small-arm-extra \
   "
 
 Now, let see with some more detail how to build the comodoo image
@@ -85,32 +90,34 @@ for a Raspberry Pi 3:
    cd ..
 5. git clone git://git.yoctoproject.org/meta-cloud-services
 6. git clone git://github.com/sarnold/meta-small-arm-extra.git
-7. git clone git://git.yoctoproject.org/meta-raspberrypi
+7. git clone git://git.yoctoproject.org/meta-eca
+8. git clone git://git.yoctoproject.org/meta-raspberrypi
    # No need to checkout another branch, only master branch has raspberrypi3.conf
-8. git clone git://github.com/mozilla-japan/meta-browser.git
-   # Default brach is already firefox-45.0esr
-9. git clone git://github.com/indisoluble/meta-comodoo.git
-   # Or git clone git@github.com:indisoluble/meta-comodoo.git
-10. source oe-init-build-env
-11. cd conf/
-12.nano bblayers.conf
+9. git clone git://github.com/mozilla-japan/meta-browser.git
+   # Default branch is already firefox-45.0esr
+10. git clone git://github.com/indisoluble/meta-comodoo.git
+    # Or git clone git@github.com:indisoluble/meta-comodoo.git
+11. source oe-init-build-env
+12. cd conf/
+13.nano bblayers.conf
    # Edit var BBLAYERS as follows:
 BBLAYERS ?= "
     /path/to/yocto/meta \
     /path/to/yocto/meta-poky \
     /path/to/yocto/meta-yocto-bsp \
-    /path/to/yocto/meta-openembedded/meta-oe \
-    /path/to/yocto/meta-openembedded/meta-gnome \
-    /path/to/yocto/meta-openembedded/meta-ruby \
-    /path/to/yocto/meta-openembedded/meta-python \
-    /path/to/yocto/meta-qt5 \
-    /path/to/yocto/meta-cloud-services/meta-openstack \
-    /path/to/yocto/meta-small-arm-extra \
-    /path/to/yocto/meta-raspberrypi \
     /path/to/yocto/meta-browser \
+    /path/to/yocto/meta-cloud-services/meta-openstack \
     /path/to/yocto/meta-comodoo \
+    /path/to/yocto/meta-eca/meta-eca \
+    /path/to/yocto/meta-openembedded/meta-gnome \
+    /path/to/yocto/meta-openembedded/meta-oe \
+    /path/to/yocto/meta-openembedded/meta-python \
+    /path/to/yocto/meta-openembedded/meta-ruby \
+    /path/to/yocto/meta-qt5 \
+    /path/to/yocto/meta-raspberrypi \
+    /path/to/yocto/meta-small-arm-extra \
   "
-13. nano local.conf
+14. nano local.conf
    # Add following line to the end of the file:
 MACHINE ?= "raspberrypi3"
 
@@ -119,9 +126,25 @@ PREFERRED_PROVIDER_virtual/libgles2 = "mesa"
 PREFERRED_PROVIDER_virtual/egl = "mesa"
 PREFERRED_PROVIDER_virtual/mesa = "mesa"
 
-BBMASK += "/meta-cloud-services/meta-openstack/recipes-support/postgresql/"
-14. cd ..
-15. bitbake comodoo-image-pos
+BBMASK_append = " \
+    /meta-cloud-services/meta-openstack/recipes-connectivity/ \
+    /meta-cloud-services/meta-openstack/recipes-core/ \
+    /meta-cloud-services/meta-openstack/recipes-extended/ \
+    /meta-cloud-services/meta-openstack/recipes-graphics/ \
+    /meta-cloud-services/meta-openstack/recipes-httpd/ \
+    /meta-cloud-services/meta-openstack/recipes-kernel/ \
+    /meta-cloud-services/meta-openstack/recipes-support/ \
+    /meta-eca/meta-eca/recipes-connectivity/ \
+    /meta-eca/meta-eca/recipes-core/ \
+    /meta-eca/meta-eca/recipes-devtools/ \
+    /meta-eca/meta-eca/recipes-eca/ \
+    /meta-eca/meta-eca/recipes-kernel/ \
+    /meta-eca/meta-eca/recipes-multimedia/ \
+    /meta-eca/meta-eca/recipes-support/ \
+"
+
+15. cd ..
+16. bitbake comodoo-image-pos
 
 The first image generated with this procedure might not work. In some
 cases, after transferring the image to the SD card, inserting it in the raspberrypi
@@ -152,43 +175,61 @@ TARGET_FPU        = "hard"
 meta              
 meta-poky         
 meta-yocto-bsp    = "krogoth:8c69f7d56cbd496aa01ba0738675a170826a536b"
-meta-oe           
-meta-gnome        
-meta-ruby         
-meta-python       = "krogoth:895b25b387cae428c38990f4d2747603ee9dc92d"
-meta-qt5          = "krogoth:1ec776771f5f09c97917d3839d8140f9a7668c4a"
-meta-openstack    = "master:6043a4a17dc5ca9080dac7789e38620b7b1aa372"
-meta-small-arm-extra = "master:f0f64dcea0dfe5aafacb5b607002cc2acb6aa512"
-meta-raspberrypi  = "master:cc64d6324d1543f009f0c010d720e74b7cb9f5d5"
 meta-browser      = "firefox-45.0esr:14199ac070905b101e7bb0919748986c33374649"
-meta-comodoo      = "krogoth-barcode:d765dddb12da2eda13fc18478375526b8ffd2536"
+meta-openstack    = "master:6043a4a17dc5ca9080dac7789e38620b7b1aa372"
+meta-comodoo      = "master:9d415ecaef5ace23a1a400a29041dcee546ae9a4"
+meta-eca          = "master:77c41b86a36fa65250deb16b13b13945afc52be4"
+meta-gnome        
+meta-oe           
+meta-python       
+meta-ruby         = "krogoth:895b25b387cae428c38990f4d2747603ee9dc92d"
+meta-qt5          = "krogoth:1ec776771f5f09c97917d3839d8140f9a7668c4a"
+meta-raspberrypi  = "master:cc64d6324d1543f009f0c010d720e74b7cb9f5d5"
+meta-small-arm-extra = "master:f0f64dcea0dfe5aafacb5b607002cc2acb6aa512"
 
 
-III. Framebuffer in RaspberryPi
-=================================================
-
-Also, notice the file
-/path/to/yocto/meta-comodoo/recipes-bsp/bootfiles/rpi-config_git.bbappend.
-This file point to the a located in
-git://github.com/indisoluble/RPi-config.git and its only purpose is to
-force the screen size to 1024x768, which is quite convenient when we
-connect with a VNC client to the RaspberryPi but there is not a display
-plugged in the HDMI port.
-
-
-IV. HOWTO launch the kiosk
+III. HOWTO launch the kiosk
 =================================================
 
 1. Switch on the RaspberryPi.
-2. Connect by ssh to the RaspberryPi.
-3. On the ssh terminal, launch 'x11vnc &'.
+2. Connect by SSH to the RaspberryPi.
+3. On the SSH terminal, launch 'x11vnc &'.
 4. When the VNC server is ready, open a VNC client on your host computer.
-5. Back on the ssh terminal, execute 'comodoo-posboxless.sh &'.
-6. And then, execute 'comodoo-kiosk.py &'
-7. On the VNC client window, Firefox will be launched on kiosk mode and
-   it will load the Odoo login page.
+5. Back on the SSH terminal, execute 'comodoo-network-configuration.py &'
+6. On the VNC client window will appear a list of available WIFI's,
+   as well as the Ethernet connection we are currently using.
+7. Select your WIFI network and, in the next screen, type twice the
+   passphrase for the selected WIFI.
+8. If everything is OK, next to your WIFI will appear a green circle.
+   Then press 'Continue' on the top right corner.
+9. Close the VNC client window as well as the SSH session.
+10. Open a new SSH connection using the IP address assigned by the
+    WIFI router and repeat steps 3 & 4.
+11. Now, execute 'comodoo-posboxless.sh &'.
+12. And then, execute 'comodoo-kiosk.py &'
+13. On the VNC client window, Firefox will be launched on kiosk mode and
+    it will load the Odoo login page.
 
 In case, you are not interested in login in Odoo service (for example,
 if you are running an Odoo Docker image), you can also pass an URL to
 'comodoo-kiosk.py': 'comodoo-kiosk.py --url <URL> &'. In this way,
 Firefox will load the specified webpage instead of the default page.
+
+
+IV. Know issues during WIFI configuration
+=================================================
+
+* Type a passphrase smaller than 8 characteres:
+  In this case, when the list of available WIFIs is shown again,
+  yours is shown with a red circle and there is no way to connect
+  to it, even if you type the right password.
+  If you are in this situation: 1º make sure your passphrase has
+  between 8 and 64 characters, 2º restart the device, 3º try
+  again with the right passphrase.
+
+* WIFI is disconnected or the decive lost connection for a short
+  period of time:
+  It should reconnect on its own but it does not. I am afraid this
+  is a WIP so, until we fix this problem, you have to reboot your
+  device. On the bright side, it will automatically reconnect after
+  the reboot.
