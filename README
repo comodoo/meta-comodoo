@@ -28,10 +28,7 @@ This layer depends on:
   branch: master
 
   URI: git://git.openembedded.org/meta-openembedded
-  layers: meta-gnome, meta-oe, meta-python, meta-ruby
-  branch: krogoth
-
-  URI: git://github.com/meta-qt5/meta-qt5.git
+  layers: meta-gnome, meta-oe, meta-python
   branch: krogoth
 
   URI: git://github.com/sarnold/meta-small-arm-extra.git
@@ -68,8 +65,6 @@ BBLAYERS ?= " \
     /path/to/yocto/meta-openembedded/meta-gnome \
     /path/to/yocto/meta-openembedded/meta-oe \
     /path/to/yocto/meta-openembedded/meta-python \
-    /path/to/yocto/meta-openembedded/meta-ruby \
-    /path/to/yocto/meta-qt5 \
     /path/to/yocto/meta-small-arm-extra \
   "
 
@@ -84,22 +79,18 @@ for a Raspberry Pi 3:
    cd meta-openembedded/
    git checkout -b krogoth origin/krogoth
    cd ..
-4. git clone git://github.com/meta-qt5/meta-qt5.git
-   cd meta-qt5/
-   git checkout -b krogoth origin/krogoth
-   cd ..
-5. git clone git://git.yoctoproject.org/meta-cloud-services
-6. git clone git://github.com/sarnold/meta-small-arm-extra.git
-7. git clone git://git.yoctoproject.org/meta-eca
-8. git clone git://git.yoctoproject.org/meta-raspberrypi
+4. git clone git://git.yoctoproject.org/meta-cloud-services
+5. git clone git://github.com/sarnold/meta-small-arm-extra.git
+6. git clone git://git.yoctoproject.org/meta-eca
+7. git clone git://git.yoctoproject.org/meta-raspberrypi
    # No need to checkout another branch, only master branch has raspberrypi3.conf
-9. git clone git://github.com/mozilla-japan/meta-browser.git
+8. git clone git://github.com/mozilla-japan/meta-browser.git
    # Default branch is already firefox-45.0esr
-10. git clone git://github.com/indisoluble/meta-comodoo.git
-    # Or git clone git@github.com:indisoluble/meta-comodoo.git
-11. source oe-init-build-env
-12. cd conf/
-13.nano bblayers.conf
+9. git clone git://github.com/indisoluble/meta-comodoo.git
+   # Or git clone git@github.com:indisoluble/meta-comodoo.git
+10. source oe-init-build-env
+11. cd conf/
+12.nano bblayers.conf
    # Edit var BBLAYERS as follows:
 BBLAYERS ?= "
     /path/to/yocto/meta \
@@ -112,11 +103,10 @@ BBLAYERS ?= "
     /path/to/yocto/meta-openembedded/meta-gnome \
     /path/to/yocto/meta-openembedded/meta-oe \
     /path/to/yocto/meta-openembedded/meta-python \
-    /path/to/yocto/meta-openembedded/meta-ruby \
-    /path/to/yocto/meta-qt5 \
     /path/to/yocto/meta-raspberrypi \
     /path/to/yocto/meta-small-arm-extra \
   "
+
 14. nano local.conf
    # Add following line to the end of the file:
 MACHINE ?= "raspberrypi3"
@@ -129,6 +119,7 @@ PREFERRED_PROVIDER_virtual/mesa = "mesa"
 BBMASK_append = " \
     /meta-cloud-services/meta-openstack/recipes-connectivity/ \
     /meta-cloud-services/meta-openstack/recipes-core/ \
+    /meta-cloud-services/meta-openstack/recipes-devtools/ruby/ \
     /meta-cloud-services/meta-openstack/recipes-extended/ \
     /meta-cloud-services/meta-openstack/recipes-graphics/ \
     /meta-cloud-services/meta-openstack/recipes-httpd/ \
@@ -141,6 +132,14 @@ BBMASK_append = " \
     /meta-eca/meta-eca/recipes-kernel/ \
     /meta-eca/meta-eca/recipes-multimedia/ \
     /meta-eca/meta-eca/recipes-support/ \
+    /meta-small-arm-extra/recipes-bsp \
+    /meta-small-arm-extra/recipes-core \
+    /meta-small-arm-extra/recipes-devtools/opkg \
+    /meta-small-arm-extra/recipes-extended \
+    /meta-small-arm-extra/recipes-graphics \
+    /meta-small-arm-extra/recipes-kernel \
+    /meta-small-arm-extra/recipes-qt \
+    /meta-small-arm-extra/recipes-support \
 "
 
 15. cd ..
@@ -177,13 +176,11 @@ meta-poky
 meta-yocto-bsp    = "krogoth:8c69f7d56cbd496aa01ba0738675a170826a536b"
 meta-browser      = "firefox-45.0esr:14199ac070905b101e7bb0919748986c33374649"
 meta-openstack    = "master:6043a4a17dc5ca9080dac7789e38620b7b1aa372"
-meta-comodoo      = "master:9d415ecaef5ace23a1a400a29041dcee546ae9a4"
+meta-comodoo      = "master:032f52250c6f2b7487f0256b71f836bcd50d7335"
 meta-eca          = "master:77c41b86a36fa65250deb16b13b13945afc52be4"
 meta-gnome        
 meta-oe           
-meta-python       
-meta-ruby         = "krogoth:895b25b387cae428c38990f4d2747603ee9dc92d"
-meta-qt5          = "krogoth:1ec776771f5f09c97917d3839d8140f9a7668c4a"
+meta-python       = "krogoth:895b25b387cae428c38990f4d2747603ee9dc92d"
 meta-raspberrypi  = "master:cc64d6324d1543f009f0c010d720e74b7cb9f5d5"
 meta-small-arm-extra = "master:f0f64dcea0dfe5aafacb5b607002cc2acb6aa512"
 
