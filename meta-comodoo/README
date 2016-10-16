@@ -39,9 +39,10 @@ Table of Contents
 =================
 
    I. Adding the comodoo layer to your build
-  II. Build configuration for RaspberryPi 3
- III. HOWTO launch the kiosk
-  IV. Know issues during WIFI configuration
+  II. Build an image for Rpi3 with VNC support & fixed screen size
+ III. Build configuration for Rpi3 with VNC support & fixed screen size
+  IV. HOWTO launch the kiosk
+   V. Know issues during WIFI configuration
 
 I. Adding the comodoo layer to your build
 =========================================
@@ -68,8 +69,11 @@ BBLAYERS ?= " \
     /path/to/yocto/meta-small-arm-extra \
   "
 
-Now, let see with some more detail how to build the comodoo image
-for a Raspberry Pi 3:
+
+II. Build an image for Rpi3 with VNC support & fixed screen size
+================================================================
+
+Now, let see how to build the comodoo image for a RaspberryPi 3:
 
 1. [OPTIONAL] sudo apt-get install autoconf2.13
 2. git clone git://git.yoctoproject.org/poky
@@ -83,9 +87,9 @@ for a Raspberry Pi 3:
 5. git clone git://github.com/sarnold/meta-small-arm-extra.git
 6. git clone git://git.yoctoproject.org/meta-eca
 7. git clone git://git.yoctoproject.org/meta-raspberrypi
-   # No need to checkout another branch, only master branch has raspberrypi3.conf
+   # No need to checkout another branch, only master includes raspberrypi3.conf
 8. git clone git://github.com/mozilla-japan/meta-browser.git
-   # Default branch is already firefox-45.0esr
+   # Default branch is firefox-45.0esr
 9. git clone git://github.com/indisoluble/meta-comodoo.git
    # Or git clone git@github.com:indisoluble/meta-comodoo.git
 10. source oe-init-build-env
@@ -160,8 +164,8 @@ This time, the building process will be a lot faster and the new image generated
 in /path/to/yocto/build/tmp/deploy/images/raspberrypi3/ should be ok.
 
 
-II. Build configuration for RaspberryPi 3
-=========================================
+III. Build configuration for Rpi3 with VNC support & fixed screen size
+======================================================================
 
 BB_VERSION        = "1.30.0"
 BUILD_SYS         = "x86_64-linux"
@@ -177,7 +181,8 @@ meta-poky
 meta-yocto-bsp    = "krogoth:8c69f7d56cbd496aa01ba0738675a170826a536b"
 meta-browser      = "firefox-45.0esr:14199ac070905b101e7bb0919748986c33374649"
 meta-openstack    = "master:6043a4a17dc5ca9080dac7789e38620b7b1aa372"
-meta-comodoo      = "master:ca2803c73e5afa26e5a9c257f8b66c177e82a88d"
+meta-comodoo      
+meta-rpi-fixed-fb = "master:e5a513782a33a931e72750c6789e7f2f56c455b7"
 meta-eca          = "master:77c41b86a36fa65250deb16b13b13945afc52be4"
 meta-gnome        
 meta-oe           
@@ -186,8 +191,8 @@ meta-raspberrypi  = "master:cc64d6324d1543f009f0c010d720e74b7cb9f5d5"
 meta-small-arm-extra = "master:f0f64dcea0dfe5aafacb5b607002cc2acb6aa512"
 
 
-III. HOWTO launch the kiosk
-===========================
+IV. HOWTO launch the kiosk
+==========================
 
 1. Switch on the RaspberryPi.
 2. Connect by SSH to the RaspberryPi.
@@ -216,8 +221,8 @@ In this way, Firefox will load the specified webpage instead of the
 default page.
 
 
-IV. Know issues during WIFI configuration
-=========================================
+V. Know issues during WIFI configuration
+========================================
 
 * Type a passphrase smaller than 8 characteres:
   In this case, when the list of available WIFIs is shown again,
