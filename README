@@ -176,7 +176,7 @@ meta-poky
 meta-yocto-bsp    = "krogoth:8c69f7d56cbd496aa01ba0738675a170826a536b"
 meta-browser      = "firefox-45.0esr:14199ac070905b101e7bb0919748986c33374649"
 meta-openstack    = "master:6043a4a17dc5ca9080dac7789e38620b7b1aa372"
-meta-comodoo      = "master:032f52250c6f2b7487f0256b71f836bcd50d7335"
+meta-comodoo      = "master:ca2803c73e5afa26e5a9c257f8b66c177e82a88d"
 meta-eca          = "master:77c41b86a36fa65250deb16b13b13945afc52be4"
 meta-gnome        
 meta-oe           
@@ -192,7 +192,8 @@ III. HOWTO launch the kiosk
 2. Connect by SSH to the RaspberryPi.
 3. On the SSH terminal, launch 'x11vnc &'.
 4. When the VNC server is ready, open a VNC client on your host computer.
-5. Back on the SSH terminal, execute 'comodoo-network-configuration.py &'
+5. Back on the SSH terminal, execute
+   '/opt/comodoo/bin/comodoo-network-configuration.py &'
 6. On the VNC client window will appear a list of available WIFI's,
    as well as the Ethernet connection we are currently using.
 7. Select your WIFI network and, in the next screen, type twice the
@@ -202,15 +203,16 @@ III. HOWTO launch the kiosk
 9. Close the VNC client window as well as the SSH session.
 10. Open a new SSH connection using the IP address assigned by the
     WIFI router and repeat steps 3 & 4.
-11. Now, execute 'comodoo-posboxless.sh &'.
-12. And then, execute 'comodoo-kiosk.py &'
+11. Now, execute '/opt/comodoo/bin/comodoo-posboxless.sh &'.
+12. And then, execute '/opt/comodoo/bin/comodoo-kiosk.py &'
 13. On the VNC client window, Firefox will be launched on kiosk mode and
     it will load the Odoo login page.
 
 In case, you are not interested in login in Odoo service (for example,
 if you are running an Odoo Docker image), you can also pass an URL to
-'comodoo-kiosk.py': 'comodoo-kiosk.py --url <URL> &'. In this way,
-Firefox will load the specified webpage instead of the default page.
+'comodoo-kiosk.py': '/opt/comodoo/bin/comodoo-kiosk.py --url <URL> &'.
+In this way, Firefox will load the specified webpage instead of the
+default page.
 
 
 IV. Know issues during WIFI configuration
