@@ -13,4 +13,4 @@ else
     /etc/init.d/postgresql-server start
 fi
 
-/usr/src/odoo/odoo.py --load=web,hw_proxy,hw_posbox_homepage,hw_scale,hw_scanner,hw_escpos
+/opt/odoo/odoo.py --load=web,hw_proxy,hw_posbox_homepage,hw_scale,hw_scanner,hw_escpos

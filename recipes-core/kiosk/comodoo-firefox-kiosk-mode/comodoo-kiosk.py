@@ -13,7 +13,7 @@ from subprocess import call
 
 ARGUMENT_URL = 'url'
 COMODOO_OWN_DIR = join(expanduser("~"), '.comodoo')
-COMODOO_SHARED_DIR = '/usr/share/comodoo'
+COMODOO_SHARED_DIR = '/opt/comodoo/share'
 
 # Functions
 

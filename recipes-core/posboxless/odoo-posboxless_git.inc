@@ -10,7 +10,7 @@ do_compile() {
     :
 }
 
-ODOO_SRCDIR = "${prefix}/src/odoo"
+ODOO_SRCDIR = "/opt/odoo"
 
 do_install() {
     ADDONS_DIR="addons"
