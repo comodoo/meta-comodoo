@@ -40,7 +40,9 @@ Table of Contents
 
    I. Adding the comodoo layer to your build
   II. Build an image for Rpi3 with VNC support & fixed screen size
- III. Build configuration for Rpi3 with VNC support & fixed screen size
+  II. (a) Build configuration
+ III. Build an image for Rpi3 & 'Eleduino 7.0 Inch 1024x600 Touch Screen' with VNC support
+ III. (a) Build configuration
   IV. HOWTO launch the kiosk
    V. Know issues during WIFI configuration
 
@@ -164,8 +166,8 @@ This time, the building process will be a lot faster and the new image generated
 in /path/to/yocto/build/tmp/deploy/images/raspberrypi3/ should be ok.
 
 
-III. Build configuration for Rpi3 with VNC support & fixed screen size
-======================================================================
+II. (a) Build configuration
+===========================
 
 BB_VERSION        = "1.30.0"
 BUILD_SYS         = "x86_64-linux"
@@ -182,7 +184,61 @@ meta-yocto-bsp    = "krogoth:8c69f7d56cbd496aa01ba0738675a170826a536b"
 meta-browser      = "firefox-45.0esr:14199ac070905b101e7bb0919748986c33374649"
 meta-openstack    = "master:6043a4a17dc5ca9080dac7789e38620b7b1aa372"
 meta-comodoo      
-meta-rpi-fixed-fb = "master:e5a513782a33a931e72750c6789e7f2f56c455b7"
+meta-rpi-fixed-fb = "master:d3948afc3a9f7905392ab8359e11d586c6621b3a"
+meta-eca          = "master:77c41b86a36fa65250deb16b13b13945afc52be4"
+meta-gnome        
+meta-oe           
+meta-python       = "krogoth:895b25b387cae428c38990f4d2747603ee9dc92d"
+meta-raspberrypi  = "master:cc64d6324d1543f009f0c010d720e74b7cb9f5d5"
+meta-small-arm-extra = "master:f0f64dcea0dfe5aafacb5b607002cc2acb6aa512"
+
+
+III. Build an image for Rpi3 & 'Eleduino 7.0 Inch 1024x600 Touch Screen' with VNC support
+=========================================================================================
+
+To build an image for this hardware:
+
+- RaspberryPi 3
+- Eleduino 7.0 Inch 1024x600 Pixel IPS Hdmi Input Capacitive Touch Screen[1]
+
+Follow the same steps described in section II but in steps 12,
+modify the file bblayers.conf with this content instead:
+BBLAYERS ?= " \
+  /home/indi_usr/Documents/comodoo/repositories/poky/meta \
+  /home/indi_usr/Documents/comodoo/repositories/poky/meta-poky \
+  /home/indi_usr/Documents/comodoo/repositories/poky/meta-yocto-bsp \
+  /home/indi_usr/Documents/comodoo/repositories/poky/meta-browser \
+  /home/indi_usr/Documents/comodoo/repositories/poky/meta-cloud-services/meta-openstack \
+  /home/indi_usr/Documents/comodoo/repositories/poky/meta-comodoo/meta-comodoo \
+  /home/indi_usr/Documents/comodoo/repositories/poky/meta-comodoo/meta-rpi-eleduino-7inch-1024x600 \
+  /home/indi_usr/Documents/comodoo/repositories/poky/meta-eca/meta-eca \
+  /home/indi_usr/Documents/comodoo/repositories/poky/meta-openembedded/meta-gnome \
+  /home/indi_usr/Documents/comodoo/repositories/poky/meta-openembedded/meta-oe \
+  /home/indi_usr/Documents/comodoo/repositories/poky/meta-openembedded/meta-python \
+  /home/indi_usr/Documents/comodoo/repositories/poky/meta-raspberrypi \
+  /home/indi_usr/Documents/comodoo/repositories/poky/meta-small-arm-extra \
+  "
+
+
+III. (a) Build configuration
+============================
+
+BB_VERSION        = "1.30.0"
+BUILD_SYS         = "x86_64-linux"
+NATIVELSBSTRING   = "universal"
+TARGET_SYS        = "arm-poky-linux-gnueabi"
+MACHINE           = "raspberrypi3"
+DISTRO            = "poky"
+DISTRO_VERSION    = "2.1.1"
+TUNE_FEATURES     = "arm armv7ve vfp thumb neon vfpv4 callconvention-hard cortexa7"
+TARGET_FPU        = "hard"
+meta              
+meta-poky         
+meta-yocto-bsp    = "krogoth:8c69f7d56cbd496aa01ba0738675a170826a536b"
+meta-browser      = "firefox-45.0esr:14199ac070905b101e7bb0919748986c33374649"
+meta-openstack    = "master:6043a4a17dc5ca9080dac7789e38620b7b1aa372"
+meta-comodoo      
+meta-rpi-eleduino-7inch-1024x600 = "master:d3948afc3a9f7905392ab8359e11d586c6621b3a"
 meta-eca          = "master:77c41b86a36fa65250deb16b13b13945afc52be4"
 meta-gnome        
 meta-oe           
@@ -220,6 +276,10 @@ if you are running an Odoo Docker image), you can also pass an URL to
 In this way, Firefox will load the specified webpage instead of the
 default page.
 
+Also notice that, in case you connected a screen to the RaspberryPi
+(like the 'Eleduino Touch Screen' mentioned above), you can ignore all
+the steps related to connect by SSH or VNC: 2, 3, 4, 9 & 10.
+
 
 V. Know issues during WIFI configuration
 ========================================
@@ -238,3 +298,5 @@ V. Know issues during WIFI configuration
   is a WIP so, until we fix this problem, you have to reboot your
   device. On the bright side, it will automatically reconnect after
   the reboot.
+
+[1] http://www.eleduino.com/7-0-Inch-1024x600-Pixel-IPS-Hdmi-Input-Capacitive-Touch-Screen-Support-Raspberry-pi-Banana-Pi-Pro-Be-p10533.html
