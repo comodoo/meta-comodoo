@@ -1,0 +1,45 @@
+From ad490acef495a2a400c1ab5c664acbdf92c0e53f Mon Sep 17 00:00:00 2001
+From: Enrique de la Torre <indisoluble_dev@me.com>
+Date: Tue, 18 Oct 2016 15:41:09 +0200
+Subject: [PATCH] Config for Eleduino 7.0 Inch 1024x600
+
+---
+ config.txt | 8 +++++---
+ 1 file changed, 5 insertions(+), 3 deletions(-)
+
+diff --git a/config.txt b/config.txt
+index 16db254..c2f69dd 100644
+--- a/config.txt
++++ b/config.txt
+@@ -192,7 +192,7 @@
+ ##     1        CEA
+ ##     2        DMT
+ ##
+-#hdmi_group=1
++hdmi_group=2
+ 
+ ## hdmi_mode
+ ##     defines screen resolution in CEA or DMT format
+@@ -294,7 +294,9 @@
+ ##     85                                       720p      60Hz
+ ##     86                                       1366x768        reduced blanking
+ ##
+-#hdmi_mode=1
++hdmi_mode=1
++hdmi_mode=87
++hdmi_cvt 1024 600 60 6 0 0 0
+ 
+ ## config_hdmi_boost
+ ##     configure the signal strength of the HDMI interface.
+@@ -1052,7 +1054,7 @@
+ ##
+ ##     Default 0.
+ ##
+-#max_usb_current=0
++max_usb_current=1
+ 
+ ################################################################################
+ ##  Base Device Tree Parameters
+-- 
+2.7.4
+

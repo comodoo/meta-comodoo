@@ -1,0 +1,37 @@
+This README file contains information on the contents of the
+rpi-eleduino-7inch-1024x600 layer.
+
+Please see the corresponding sections below for details.
+
+
+Dependencies
+============
+
+This layer depends on:
+
+  URI: git://git.openembedded.org/bitbake
+  branch: master
+
+  URI: git://git.openembedded.org/openembedded-core
+  layers: meta
+  branch: master
+
+  URI: git://git.yoctoproject.org/meta-raspberrypi
+  branch: master
+
+
+Table of Contents
+=================
+
+  I. Misc
+
+
+I. Misc
+=======
+
+Use this layer in combination with 'meta-comodo'
+to build an image for 'RaspberryPi' with an
+'Eleduino 7.0 Inch 1024x600 Pixel IPS Hdmi
+Input Capacitive Touch Screen'[1]
+
+[1] http://www.eleduino.com/7-0-Inch-1024x600-Pixel-IPS-Hdmi-Input-Capacitive-Touch-Screen-Support-Raspberry-pi-Banana-Pi-Pro-Be-p10533.html
