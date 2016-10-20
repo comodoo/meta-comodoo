@@ -1,10 +1,12 @@
 require comodoo-image-core.bb
 
 IMAGE_INSTALL_append = " \
-    firefox \
+    comodoo-pos-launcher \
+    \
     comodoo-firefox-kiosk-mode \
+    firefox \
     \ 
-    comodoo-posboxless \
+    comodoo-hardware-proxy \
     postgresql \
     postgresql-client \
     python-pyserial \
@@ -30,5 +32,5 @@ IMAGE_INSTALL_append = " \
     \
     comodoo-network-configuration \
     eca-web \
-    connman \ 
+    connman \
 "

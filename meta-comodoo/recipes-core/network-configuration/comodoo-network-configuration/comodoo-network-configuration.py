@@ -12,7 +12,7 @@ from subprocess import Popen
 APP_ECA_WEB = '/opt/eca-web/start-eca-web'
 APP_ECA_WEB_URL = '0.0.0.0:8080'
 
-APP_KIOSK = '/opt/comodoo/bin/comodoo-kiosk.py'
+APP_KIOSK = '/opt/comodoo/bin/comodoo-firefox-kiosk.py'
 APP_KIOSK_PARAM_URL = '--url'
 
 # Main

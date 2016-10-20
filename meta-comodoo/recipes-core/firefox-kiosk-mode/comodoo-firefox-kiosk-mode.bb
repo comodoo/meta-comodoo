@@ -1,11 +1,11 @@
 require comodoo-firefox-addon-rkiosk.inc
 
-PV = "20161016"
-PR = "r3"
+PV = "20161020"
+PR = "r4"
 
 PREFS_JS = "prefs.js"
 EXTENSIONS_JSON = "extensions.json"
-COMODOO-KIOSK_PY = "comodoo-kiosk.py"
+COMODOO-KIOSK_PY = "comodoo-firefox-kiosk.py"
 SRC_URI_append = "file://${PREFS_JS} \
                   file://${EXTENSIONS_JSON} \
                   file://${COMODOO-KIOSK_PY} \
