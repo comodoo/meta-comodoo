@@ -2,6 +2,7 @@ require comodoo-image-core.bb
 
 IMAGE_INSTALL_append = " \
     comodoo-pos-launcher \
+    python-netifaces \
     \
     comodoo-firefox-kiosk-mode \
     firefox \

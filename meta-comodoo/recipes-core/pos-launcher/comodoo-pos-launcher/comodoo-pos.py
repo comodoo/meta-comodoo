@@ -7,6 +7,9 @@ from os import getpgid, killpg, setsid
 from os.path import exists, expanduser, join
 from signal import SIGTERM
 from subprocess import call, Popen
+from time import sleep
+
+import netifaces
 
 # Constants
 
@@ -23,7 +26,22 @@ APP_KIOSK_ARG_URL = '--url'
 COMODOO_OWN_DIR = join(expanduser('~'), '.comodoo')
 COMODOO_SERVERURL_FILEPATH = join(COMODOO_OWN_DIR, 'server_url')
 
+LOCAL_INTERFACE = 'lo'
+SLEEP_TIME_BEFORE_CONNECTION = 8
+
 # Functions
+
+def is_connected():
+    interfaces = netifaces.interfaces()
+    interfaces.remove(LOCAL_INTERFACE)
+
+    for interfaz in interfaces:
+        addrs = netifaces.ifaddresses(interfaz)
+
+        if ( netifaces.AF_INET in addrs ):
+            return True
+
+    return False
 
 def configure_network():
     call([APP_NET_CONF])
@@ -64,7 +82,10 @@ def launch_pos(url):
 # Main
 
 def main(args):
-    configure_network()
+    sleep(SLEEP_TIME_BEFORE_CONNECTION)
+
+    if ( not is_connected() ):
+        configure_network()
 
     url = args[ARGUMENT_URL]
     if ( not url ):
