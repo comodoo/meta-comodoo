@@ -5,6 +5,13 @@ IMAGE_INSTALL_append = " \
     \
     comodoo-firefox-kiosk-mode \
     firefox \
+    \
+    comodoo-server-url-configuration \
+    cherryPy \
+    \
+    comodoo-network-configuration \
+    eca-web \
+    connman \
     \ 
     comodoo-hardware-proxy \
     postgresql \
@@ -29,8 +36,4 @@ IMAGE_INSTALL_append = " \
     python-jinja2 \
     python-docutils \
     python-evdev \
-    \
-    comodoo-network-configuration \
-    eca-web \
-    connman \
 "
