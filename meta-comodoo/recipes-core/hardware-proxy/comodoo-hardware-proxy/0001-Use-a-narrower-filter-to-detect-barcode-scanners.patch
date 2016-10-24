@@ -1,0 +1,26 @@
+From 76e7343b325c792c4683c8b4ca6a32135628f42c Mon Sep 17 00:00:00 2001
+From: Enrique de la Torre <indisoluble_dev@me.com>
+Date: Mon, 24 Oct 2016 18:07:37 +0200
+Subject: [PATCH] Use a narrower filter to detect barcode scanners
+
+---
+ addons/hw_scanner/controllers/main.py | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+
+diff --git a/addons/hw_scanner/controllers/main.py b/addons/hw_scanner/controllers/main.py
+index ad0f47a..b5c7955 100644
+--- a/addons/hw_scanner/controllers/main.py
++++ b/addons/hw_scanner/controllers/main.py
+@@ -125,8 +125,7 @@ class Scanner(Thread):
+             new_devices = [device for device in listdir(self.input_dir)
+                            if join(self.input_dir, device) not in [dev.evdev.fn for dev in self.open_devices]]
+             scanners = [device for device in new_devices
+-                        if (('kbd' in device) and ('keyboard' not in device.lower()))
+-                        or ('barcode' in device.lower()) or ('scanner' in device.lower())]
++                        if ('barcode' in device.lower()) or ('scanner' in device.lower())]
+ 
+             for device in scanners:
+                 _logger.debug('opening device %s', join(self.input_dir,device))
+-- 
+2.7.4
+

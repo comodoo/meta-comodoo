@@ -1,10 +1,13 @@
 require odoo-posboxless_git.inc
 
-PV = "20161020"
-PR = "r3"
+PV = "20161024"
+PR = "r4"
 
 COMODOO-HW-PROXY_SH = "comodoo-hardware-proxy.sh"
-SRC_URI_append = " file://${COMODOO-HW-PROXY_SH}"
+SRC_URI_append = " \
+    file://${COMODOO-HW-PROXY_SH} \
+    file://0001-Use-a-narrower-filter-to-detect-barcode-scanners.patch \
+    "
 
 COMODOO_DIR = "/opt/comodoo"
 COMODOO_BINDIR = "${COMODOO_DIR}/bin"
