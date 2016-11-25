@@ -12,8 +12,10 @@ IMAGE_INSTALL_append = " \
     \
     comodoo-network-configuration \
     eca-web \
+    \
+    python-pyconnman \
     connman \
-    \ 
+    \
     comodoo-hardware-proxy \
     postgresql \
     postgresql-client \
