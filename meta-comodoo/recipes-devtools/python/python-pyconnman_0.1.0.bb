@@ -13,6 +13,8 @@ S = "${WORKDIR}/pyconnman-${PV}"
 
 inherit setuptools
 
-RDEPENDS_${PN} = "\
+RDEPENDS_${PN} = " \
+  connman \
   python-dbus \
+  python-pygobject \
   "
