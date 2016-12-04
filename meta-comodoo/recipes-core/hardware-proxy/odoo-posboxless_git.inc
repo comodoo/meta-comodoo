@@ -41,4 +41,30 @@ do_install() {
     chown root:root -R ${D}${ODOO_SRCDIR}
 }
 
-FILES_${PN} += "${ODOO_SRCDIR}"
+FILES_${PN} += " ${ODOO_SRCDIR}"
+
+RDEPENDS_${PN} += " \
+    postgresql \
+    postgresql-client \
+    python \
+    python-babel \
+    python-dateutil \
+    python-decorator \
+    python-docutils \
+    python-evdev \
+    python-imaging \
+    python-jinja2 \
+    python-lxml \
+    python-mako \
+    python-passlib \
+    python-psycopg2 \
+    python-psutil \
+    python-pychart \
+    python-pyserial \
+    python-pytz \
+    python-pyusb \
+    python-pyyaml \
+    python-reportlab \
+    python-requests \
+    python-werkzeug \
+    "

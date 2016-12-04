@@ -26,4 +26,4 @@ do_install() {
     chown root:root -R ${ADDON_DIR}
 }
 
-FILES_${PN} += "${FIREFOX_LIBDIR}"
+FILES_${PN} += " ${FIREFOX_LIBDIR}"

@@ -1,8 +1,8 @@
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=4d92cd373abda3937c2bc47fbc49d690"
 
-PV = "20161021"
-PR = "r2"
+PV = "20161204"
+PR = "r3"
 
 COMODOO-POS_PY = "comodoo-pos.py"
 COMODOO-POS_SH = "70xcomodoo-pos.sh"
@@ -25,8 +25,12 @@ do_install() {
     chown root:root ${D}${XSESSION_DIR}/${COMODOO-POS_SH}
 }
 
-FILES_${PN} += "${COMODOO_BINDIR}/${COMODOO-POS_PY} \
-                ${XSESSION_DIR}/${COMODOO-POS_SH} \
-               "
+FILES_${PN} += " \
+    ${COMODOO_BINDIR}/${COMODOO-POS_PY} \
+    ${XSESSION_DIR}/${COMODOO-POS_SH} \
+    "
 
-RDEPENDS_${PN} += "bash python"
+RDEPENDS_${PN} += " \
+  bash \
+  python \
+  "

@@ -35,8 +35,12 @@ do_install_append() {
     chown root:root ${D}${COMODOO_BINDIR}/${COMODOO-KIOSK_PY}
 }
 
-FILES_${PN} += "${COMODOO_FIREFOX_DATADIR} \
-                ${COMODOO_BINDIR}/${COMODOO-KIOSK_PY} \
-               "
+FILES_${PN} += " \
+    ${COMODOO_FIREFOX_DATADIR} \
+    ${COMODOO_BINDIR}/${COMODOO-KIOSK_PY} \
+    "
 
-RDEPENDS_${PN} += "python"
+RDEPENDS_${PN} += " \
+    python \
+    firefox \
+    "

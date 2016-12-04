@@ -18,6 +18,6 @@ do_install_append() {
     chown root:root ${D}${COMODOO_BINDIR}/${COMODOO-HW-PROXY_SH}
 }
 
-FILES_${PN} += "${COMODOO_BINDIR}/${COMODOO-HW-PROXY_SH}"
+FILES_${PN} += " ${COMODOO_BINDIR}/${COMODOO-HW-PROXY_SH}"
 
-RDEPENDS_${PN} += "bash"
+RDEPENDS_${PN} += " bash"

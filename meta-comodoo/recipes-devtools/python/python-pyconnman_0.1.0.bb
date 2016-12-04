@@ -16,5 +16,4 @@ inherit setuptools
 RDEPENDS_${PN} = " \
   connman \
   python-dbus \
-  python-pygobject \
   "
