@@ -23,10 +23,6 @@ This layer depends on:
   layers: meta-openstack
   branch: master
 
-  URI: git://git.yoctoproject.org/meta-eca
-  layers: meta-eca
-  branch: master
-
   URI: git://github.com/facebook/openbmc.git
   branch: master
 
@@ -67,13 +63,12 @@ BBLAYERS ?= " \
     /path/to/yocto/meta-browser \
     /path/to/yocto/meta-cloud-services/meta-openstack \
     /path/to/yocto/meta-comodoo/meta-comodoo \
-    /path/to/yocto/meta-eca/meta-eca \
     /path/to/yocto/meta-openbmc \
     /path/to/yocto/meta-openembedded/meta-gnome \
     /path/to/yocto/meta-openembedded/meta-oe \
     /path/to/yocto/meta-openembedded/meta-python \
     /path/to/yocto/meta-small-arm-extra \
-  "
+    "
 
 
 II. Build an image for Rpi3 with VNC support & fixed screen size
@@ -91,19 +86,18 @@ Now, let see how to build the comodoo image for a RaspberryPi 3:
    cd ..
 4. git clone git://git.yoctoproject.org/meta-cloud-services
 5. git clone git://github.com/sarnold/meta-small-arm-extra.git
-6. git clone git://git.yoctoproject.org/meta-eca
-7. git clone git://github.com/facebook/openbmc.git meta-openbmc
+6. git clone git://github.com/facebook/openbmc.git meta-openbmc
    # Notice that in this case, you have to provide the name of the folder
    # where to clone the repo
-8. git clone git://git.yoctoproject.org/meta-raspberrypi
+7. git clone git://git.yoctoproject.org/meta-raspberrypi
    # No need to checkout another branch, only master includes raspberrypi3.conf
-9. git clone git://github.com/mozilla-japan/meta-browser.git
+8. git clone git://github.com/mozilla-japan/meta-browser.git
    # Default branch is firefox-45.0esr
-10. git clone git://github.com/indisoluble/meta-comodoo.git
-    # Or git clone git@github.com:indisoluble/meta-comodoo.git
-11. source oe-init-build-env
-12. cd conf/
-13. nano bblayers.conf
+9. git clone git://github.com/indisoluble/meta-comodoo.git
+  # Or git clone git@github.com:indisoluble/meta-comodoo.git
+10. source oe-init-build-env
+11. cd conf/
+12. nano bblayers.conf
     # Edit var BBLAYERS as follows:
 BBLAYERS ?= " \
     /path/to/yocto/meta \
@@ -113,7 +107,6 @@ BBLAYERS ?= " \
     /path/to/yocto/meta-cloud-services/meta-openstack \
     /path/to/yocto/meta-comodoo/meta-comodoo \
     /path/to/yocto/meta-comodoo/meta-rpi-fixed-fb \
-    /path/to/yocto/meta-eca/meta-eca \
     /path/to/yocto/meta-openbmc \
     /path/to/yocto/meta-openembedded/meta-gnome \
     /path/to/yocto/meta-openembedded/meta-oe \
@@ -122,7 +115,7 @@ BBLAYERS ?= " \
     /path/to/yocto/meta-small-arm-extra \
   "
 
-14. nano local.conf
+13. nano local.conf
     # Add following line to the end of the file:
 MACHINE ?= "raspberrypi3"
 
@@ -143,19 +136,10 @@ BBMASK_append = " \
     /meta-cloud-services/meta-openstack/recipes-httpd/ \
     /meta-cloud-services/meta-openstack/recipes-kernel/ \
     /meta-cloud-services/meta-openstack/recipes-support/ \
-    /meta-eca/meta-eca/recipes-connectivity/ \
-    /meta-eca/meta-eca/recipes-core/ \
-    /meta-eca/meta-eca/recipes-devtools/ \
-    /meta-eca/meta-eca/recipes-eca/ \
-    /meta-eca/meta-eca/recipes-kernel/ \
-    /meta-eca/meta-eca/recipes-multimedia/ \
-    /meta-eca/meta-eca/recipes-support/ \
     /meta-openbmc/common/recipes-connectivity \
     /meta-openbmc/common/recipes-core \
-    /meta-openbmc/common/recipes-extended \
     /meta-openbmc/common/recipes-kernel \
     /meta-openbmc/common/recipes-lib \
-    /meta-openbmc/common/recipes-support \
     /meta-openbmc/common/recipes-tpm \
     /meta-openbmc/common/recipes-utils \
     /meta-small-arm-extra/recipes-bsp \
@@ -168,21 +152,8 @@ BBMASK_append = " \
     /meta-small-arm-extra/recipes-support \
 "
 
-15. cd ..
-16. bitbake comodoo-image-pos
-
-The first image generated with this procedure might not work. In some
-cases, after transferring the image to the SD card, inserting it in the raspberrypi
-and powering it up, when we connect the ethernet cable to the port, the LEDs
-in it do not light. Without a connection, there is not much we can do with the
-raspberrypi. My recomendation in this case is:
-
-1. cd /path/to/yocto/build
-2. rm -fr tmp/
-3. bitbake comodoo-image-pos
-
-This time, the building process will be a lot faster and the new image generated
-in /path/to/yocto/build/tmp/deploy/images/raspberrypi3/ should be ok.
+14. cd ..
+15. bitbake comodoo-image-pos
 
 
 II. (a) Build configuration
@@ -197,17 +168,16 @@ DISTRO            = "poky"
 DISTRO_VERSION    = "2.1.1"
 TUNE_FEATURES     = "arm armv7ve vfp thumb neon vfpv4 callconvention-hard cortexa7"
 TARGET_FPU        = "hard"
-meta              
-meta-poky         
+meta
+meta-poky
 meta-yocto-bsp    = "krogoth:8c69f7d56cbd496aa01ba0738675a170826a536b"
 meta-browser      = "firefox-45.0esr:14199ac070905b101e7bb0919748986c33374649"
 meta-openstack    = "master:6043a4a17dc5ca9080dac7789e38620b7b1aa372"
-meta-comodoo      
-meta-rpi-fixed-fb = "master:d322572d40e42ddf3dbdfbafc9c7e5ebe21a0940"
-meta-eca          = "master:77c41b86a36fa65250deb16b13b13945afc52be4"
+meta-comodoo
+meta-rpi-fixed-fb = "master:aa0e9d6526b83b4029de6284db20a6e6e0043a7d"
 meta-openbmc      = "master:d92449abeadec00df6ddfec58a53a0969721dabe"
-meta-gnome        
-meta-oe           
+meta-gnome
+meta-oe
 meta-python       = "krogoth:895b25b387cae428c38990f4d2747603ee9dc92d"
 meta-raspberrypi  = "master:cc64d6324d1543f009f0c010d720e74b7cb9f5d5"
 meta-small-arm-extra = "master:f0f64dcea0dfe5aafacb5b607002cc2acb6aa512"
@@ -224,20 +194,19 @@ To build an image for this hardware:
 Follow the same steps described in section II but in steps 13,
 modify the file bblayers.conf with this content instead:
 BBLAYERS ?= " \
-  /home/indi_usr/Documents/comodoo/repositories/poky/meta \
-  /home/indi_usr/Documents/comodoo/repositories/poky/meta-poky \
-  /home/indi_usr/Documents/comodoo/repositories/poky/meta-yocto-bsp \
-  /home/indi_usr/Documents/comodoo/repositories/poky/meta-browser \
-  /home/indi_usr/Documents/comodoo/repositories/poky/meta-cloud-services/meta-openstack \
-  /home/indi_usr/Documents/comodoo/repositories/poky/meta-comodoo/meta-comodoo \
-  /home/indi_usr/Documents/comodoo/repositories/poky/meta-comodoo/meta-rpi-eleduino-7inch-1024x600 \
-  /home/indi_usr/Documents/comodoo/repositories/poky/meta-eca/meta-eca \
-  /home/indi_usr/Documents/comodoo/repositories/poky/meta-openbmc \
-  /home/indi_usr/Documents/comodoo/repositories/poky/meta-openembedded/meta-gnome \
-  /home/indi_usr/Documents/comodoo/repositories/poky/meta-openembedded/meta-oe \
-  /home/indi_usr/Documents/comodoo/repositories/poky/meta-openembedded/meta-python \
-  /home/indi_usr/Documents/comodoo/repositories/poky/meta-raspberrypi \
-  /home/indi_usr/Documents/comodoo/repositories/poky/meta-small-arm-extra \
+  /path/to/yocto/meta \
+  /path/to/yocto/meta-poky \
+  /path/to/yocto/meta-yocto-bsp \
+  /path/to/yocto/meta-browser \
+  /path/to/yocto/meta-cloud-services/meta-openstack \
+  /path/to/yocto/meta-comodoo/meta-comodoo \
+  /path/to/yocto/meta-comodoo/meta-rpi-eleduino-7inch-1024x600 \
+  /path/to/yocto/meta-openbmc \
+  /path/to/yocto/meta-openembedded/meta-gnome \
+  /path/to/yocto/meta-openembedded/meta-oe \
+  /path/to/yocto/meta-openembedded/meta-python \
+  /path/to/yocto/meta-raspberrypi \
+  /path/to/yocto/meta-small-arm-extra \
   "
 
 
@@ -253,17 +222,16 @@ DISTRO            = "poky"
 DISTRO_VERSION    = "2.1.1"
 TUNE_FEATURES     = "arm armv7ve vfp thumb neon vfpv4 callconvention-hard cortexa7"
 TARGET_FPU        = "hard"
-meta              
-meta-poky         
+meta
+meta-poky
 meta-yocto-bsp    = "krogoth:8c69f7d56cbd496aa01ba0738675a170826a536b"
 meta-browser      = "firefox-45.0esr:14199ac070905b101e7bb0919748986c33374649"
 meta-openstack    = "master:6043a4a17dc5ca9080dac7789e38620b7b1aa372"
-meta-comodoo      
-meta-rpi-eleduino-7inch-1024x600 = "master:d322572d40e42ddf3dbdfbafc9c7e5ebe21a0940"
-meta-eca          = "master:77c41b86a36fa65250deb16b13b13945afc52be4"
+meta-comodoo
+meta-rpi-eleduino-7inch-1024x600 = "master:aa0e9d6526b83b4029de6284db20a6e6e0043a7d"
 meta-openbmc      = "master:d92449abeadec00df6ddfec58a53a0969721dabe"
-meta-gnome        
-meta-oe           
+meta-gnome
+meta-oe
 meta-python       = "krogoth:895b25b387cae428c38990f4d2747603ee9dc92d"
 meta-raspberrypi  = "master:cc64d6324d1543f009f0c010d720e74b7cb9f5d5"
 meta-small-arm-extra = "master:f0f64dcea0dfe5aafacb5b607002cc2acb6aa512"
@@ -274,11 +242,16 @@ IV. HOWTO launch the kiosk
 
 1. Connect an "Eleduino Touch Screen"[1] & a keyboard to the RaspberryPi.
 2. Switch it on.
-3. Wait for a few seconds until a list of WIFI's appears on screen.
-4. Select and configure your own. Then press 'Continue'.
-5. A new screen will appear, where you can type the URL of the remote
-   Odoo server. Do it and press 'Use Server URL'
-6. Finally, the Odoo login page will be presented.
+3. Wait until a list of WIFI's appears on screen. If it is empty, press the
+   button "Re-scan" to refresh the list (you might have to do this a couple of
+   times).
+4. Select your WIFI on the list.
+5. On the next screen, type the passphrase for the WIFI and press "Connect".
+6. If everything is OK, a new screen will appear where you can type the URL
+   of your Odoo server. If it was not possible to connect to the WIFI, you will
+   be redirected to the list of WIFI's.
+7. Type the Odoo server URL and press "Use".
+8. Finally, the Odoo login page will be presented.
 
 In case you built an image only with VNC support, repeat the steps
 described before but after switching on the Rpi, open an SSH connection
@@ -288,14 +261,6 @@ in your host computer. From this point on, all the steps are the same.
 
 V. Know issues during WIFI configuration
 ========================================
-
-* Type a passphrase smaller than 8 characteres:
-  In this case, when the list of available WIFIs is shown again,
-  yours is shown with a red circle and there is no way to connect
-  to it, even if you type the right password.
-  If you are in this situation: 1º make sure your passphrase has
-  between 8 and 64 characters, 2º restart the device, 3º try
-  again with the right passphrase.
 
 * WIFI is disconnected or the decive lost connection for a short
   period of time:
