@@ -1,16 +1,18 @@
+SUMMARY = "Real Kiosk is a Firefox extension that defaults to full screen, \
+disables all menus, toolbars, key commands and right button menus."
+HOMEPAGE = "https://addons.mozilla.org/en-US/firefox/addon/r-kiosk/"
+
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=4d92cd373abda3937c2bc47fbc49d690"
 
 DEPENDS = "mozilla-devscripts-native"
 
-RKIOSK_XPI = "addon-r-kiosk-latest.xpi"
-SRC_URI = "https://addons.mozilla.org/firefox/downloads/latest/r-kiosk/${RKIOSK_XPI}"
-SRC_URI[md5sum] = "cf780b3847453c3c899ee5109a083d9d"
-SRC_URI[sha256sum] = "80c1dae8a4923b90bea891e9654401bfd497260c18b6da045667897e35df57bb"
+RKIOSK_XPI = "r_kiosk-0.9.0-fx.xpi"
+SRC_URI = "file://${RKIOSK_XPI}"
 
 do_unpack() {
     rm -fr ${S}
-    xpi-unpack ${DL_DIR}/${RKIOSK_XPI} ${S}
+    xpi-unpack ${THISDIR}/${PN}/${RKIOSK_XPI} ${S}
 }
 
 FIREFOX_DIRNAME = "firefox-45.3.0"
