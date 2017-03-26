@@ -93,7 +93,7 @@ Now, let see how to build the comodoo image for a RaspberryPi 3:
 3. git clone git://git.yoctoproject.org/poky
 4. cd poky/
 5. git checkout -b krogoth origin/krogoth
-   git reset --hard b4df9df4624a300923a5dfc5a8f7157bef145a2a
+   git reset --hard e59717e80f6288410fa057e34233382bd327697a
 6. git clone git://git.openembedded.org/meta-openembedded
    cd meta-openembedded/
    git checkout -b krogoth origin/krogoth
@@ -201,7 +201,7 @@ TUNE_FEATURES     = "arm armv7ve vfp thumb neon vfpv4 callconvention-hard cortex
 TARGET_FPU        = "hard"
 meta
 meta-poky
-meta-yocto-bsp    = "krogoth:b4df9df4624a300923a5dfc5a8f7157bef145a2a"
+meta-yocto-bsp    = "krogoth:e59717e80f6288410fa057e34233382bd327697a"
 meta-browser      = "firefox-45.0esr:14199ac070905b101e7bb0919748986c33374649"
 meta-openstack    = "master:6043a4a17dc5ca9080dac7789e38620b7b1aa372"
 meta-comodoo
@@ -259,7 +259,7 @@ TUNE_FEATURES     = "arm armv7ve vfp thumb neon vfpv4 callconvention-hard cortex
 TARGET_FPU        = "hard"
 meta
 meta-poky
-meta-yocto-bsp    = "krogoth:b4df9df4624a300923a5dfc5a8f7157bef145a2a"
+meta-yocto-bsp    = "krogoth:e59717e80f6288410fa057e34233382bd327697a"
 meta-browser      = "firefox-45.0esr:14199ac070905b101e7bb0919748986c33374649"
 meta-openstack    = "master:6043a4a17dc5ca9080dac7789e38620b7b1aa372"
 meta-comodoo
