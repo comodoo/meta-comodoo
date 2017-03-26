@@ -9,30 +9,31 @@ Dependencies
 
 This layer depends on:
 
-  URI: git://git.openembedded.org/bitbake
-  branch: krogoth
+```
+URI: git://git.openembedded.org/bitbake
+branch: krogoth
 
-  URI: git://git.openembedded.org/openembedded-core
-  layers: meta
-  branch: krogoth
+URI: git://git.openembedded.org/openembedded-core
+layers: meta
+branch: krogoth
 
-  URI: git://github.com/mozilla-japan/meta-browser.git
-  branch: firefox-45.0esr
+URI: git://github.com/mozilla-japan/meta-browser.git
+branch: firefox-45.0esr
 
-  URI: git://git.yoctoproject.org/meta-cloud-services
-  layers: meta-openstack
-  branch: master
+URI: git://git.yoctoproject.org/meta-cloud-services
+layers: meta-openstack
+branch: master
 
-  URI: git://github.com/facebook/openbmc.git
-  branch: helium
+URI: git://github.com/facebook/openbmc.git
+branch: helium
 
-  URI: git://git.openembedded.org/meta-openembedded
-  layers: meta-gnome, meta-oe, meta-python
-  branch: krogoth
+URI: git://git.openembedded.org/meta-openembedded
+layers: meta-gnome, meta-oe, meta-python
+branch: krogoth
 
-  URI: git://github.com/sarnold/meta-small-arm-extra.git
-  branch: morty
-
+URI: git://github.com/sarnold/meta-small-arm-extra.git
+branch: morty
+```
 
 Table of Contents
 =================
@@ -56,6 +57,7 @@ yocto build tree, you can add it to the build system by adding the
 location of the comodoo layer to bblayers.conf, along with any
 other layers needed. e.g.:
 
+```
 BBLAYERS ?= " \
     /path/to/yocto/meta \
     /path/to/yocto/meta-poky \
@@ -69,6 +71,7 @@ BBLAYERS ?= " \
     /path/to/yocto/meta-openembedded/meta-python \
     /path/to/yocto/meta-small-arm-extra \
     "
+```
 
 
 II. Build an image for Rpi3 with VNC support & fixed screen size
@@ -76,6 +79,8 @@ II. Build an image for Rpi3 with VNC support & fixed screen size
 
 Now, let see how to build the comodoo image for a RaspberryPi 3:
 
+
+```
 1. sudo apt-get install gawk wget git-core diffstat \
    unzip texinfo gcc-multilib build-essential \
    chrpath socat cpio python python3 \
@@ -179,11 +184,12 @@ BBMASK_append = " \
 
 17. cd ..
 18. bitbake comodoo-image-pos
-
+```
 
 II. (a) Build configuration
 ===========================
 
+```
 BB_VERSION        = "1.30.0"
 BUILD_SYS         = "x86_64-linux"
 NATIVELSBSTRING   = "Ubuntu-16.04"
@@ -206,7 +212,7 @@ meta-oe
 meta-python       = "krogoth:895b25b387cae428c38990f4d2747603ee9dc92d"
 meta-raspberrypi  = "master:cc64d6324d1543f009f0c010d720e74b7cb9f5d5"
 meta-small-arm-extra = "morty:f0f64dcea0dfe5aafacb5b607002cc2acb6aa512"
-
+```
 
 III. Build an image for Rpi3 & 'Eleduino 7.0 Inch 1024x600 Touch Screen' with VNC support
 =========================================================================================
@@ -218,6 +224,8 @@ To build an image for this hardware:
 
 Follow the same steps described in section II but in step 15,
 modify the file bblayers.conf with this content instead:
+
+```
 BBLAYERS ?= " \
   /path/to/yocto/meta \
   /path/to/yocto/meta-poky \
@@ -233,11 +241,13 @@ BBLAYERS ?= " \
   /path/to/yocto/meta-raspberrypi \
   /path/to/yocto/meta-small-arm-extra \
   "
+```
 
 
 III. (a) Build configuration
 ============================
 
+```
 BB_VERSION        = "1.30.0"
 BUILD_SYS         = "x86_64-linux"
 NATIVELSBSTRING   = "Ubuntu-16.04"
@@ -260,7 +270,7 @@ meta-oe
 meta-python       = "krogoth:895b25b387cae428c38990f4d2747603ee9dc92d"
 meta-raspberrypi  = "master:cc64d6324d1543f009f0c010d720e74b7cb9f5d5"
 meta-small-arm-extra = "morty:f0f64dcea0dfe5aafacb5b607002cc2acb6aa512"
-
+```
 
 IV. HOWTO launch the kiosk
 ==========================
