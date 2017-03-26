@@ -38,15 +38,15 @@ branch: morty
 Table of Contents
 =================
 
-   I. Adding the comodoo layer to your build
-  II. Build an image for Rpi3 with VNC support & fixed screen size
-  II. (a) Build configuration
- III. Build an image for Rpi3 & 'Eleduino 7.0 Inch 1024x600 Touch Screen' with VNC support
- III. (a) Build configuration
-  IV. HOWTO launch the kiosk
-   V. Know issues during WIFI configuration
+1. Adding the comodoo layer to your build
+2. Build an image for Rpi3 with VNC support & fixed screen size
+2. (a) Build configuration
+3. Build an image for Rpi3 & 'Eleduino 7.0 Inch 1024x600 Touch Screen' with VNC support
+3. (a) Build configuration
+4. HOWTO launch the kiosk
+5. now issues during WIFI configuration
 
-I. Adding the comodoo layer to your build
+(1) Adding the comodoo layer to your build
 =========================================
 
 In order to use this layer, you need to make the build system aware of
@@ -74,7 +74,7 @@ BBLAYERS ?= " \
 ```
 
 
-II. Build an image for Rpi3 with VNC support & fixed screen size
+(2) Build an image for Rpi3 with VNC support & fixed screen size
 ================================================================
 
 Now, let see how to build the comodoo image for a RaspberryPi 3:
@@ -186,8 +186,8 @@ BBMASK_append = " \
 18. bitbake comodoo-image-pos
 ```
 
-II. (a) Build configuration
-===========================
+(2a) Build configuration
+========================
 
 ```
 BB_VERSION        = "1.30.0"
@@ -214,7 +214,7 @@ meta-raspberrypi  = "master:cc64d6324d1543f009f0c010d720e74b7cb9f5d5"
 meta-small-arm-extra = "morty:f0f64dcea0dfe5aafacb5b607002cc2acb6aa512"
 ```
 
-III. Build an image for Rpi3 & 'Eleduino 7.0 Inch 1024x600 Touch Screen' with VNC support
+(3) Build an image for Rpi3 & 'Eleduino 7.0 Inch 1024x600 Touch Screen' with VNC support
 =========================================================================================
 
 To build an image for this hardware:
@@ -244,8 +244,8 @@ BBLAYERS ?= " \
 ```
 
 
-III. (a) Build configuration
-============================
+(3a) Build configuration
+========================
 
 ```
 BB_VERSION        = "1.30.0"
@@ -272,7 +272,7 @@ meta-raspberrypi  = "master:cc64d6324d1543f009f0c010d720e74b7cb9f5d5"
 meta-small-arm-extra = "morty:f0f64dcea0dfe5aafacb5b607002cc2acb6aa512"
 ```
 
-IV. HOWTO launch the kiosk
+(4) HOWTO launch the kiosk
 ==========================
 
 1. Connect an "Eleduino Touch Screen"[1] & a keyboard to the RaspberryPi.
@@ -294,8 +294,8 @@ to the device, launch the 'x11vnc' app and then execute a VNC client
 in your host computer. From this point on, all the steps are the same.
 
 
-V. Know issues during WIFI configuration
-========================================
+(5) Know issues during WIFI configuration
+=========================================
 
 * WIFI is disconnected or the decive lost connection for a short
   period of time:
@@ -305,4 +305,5 @@ V. Know issues during WIFI configuration
   the reboot.
 
 [1] http://www.yoctoproject.org/docs/2.2.1/mega-manual/mega-manual.html#required-packages-for-the-host-development-system
+
 [2] http://www.eleduino.com/7-0-Inch-1024x600-Pixel-IPS-Hdmi-Input-Capacitive-Touch-Screen-Support-Raspberry-pi-Banana-Pi-Pro-Be-p10533.html
