@@ -13,7 +13,7 @@ do_unpack() {
     unzip ${THISDIR}/${PN}/${RKIOSK_XPI} -d ${S}
 }
 
-FIREFOX_DIRNAME = "firefox-45.3.0"
+FIREFOX_DIRNAME = "firefox"
 FIREFOX_LIBDIR = "${libdir}/${FIREFOX_DIRNAME}"
 
 do_install() {
