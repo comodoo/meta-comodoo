@@ -11,25 +11,25 @@ This layer depends on:
 
 ```
 URI: git://git.openembedded.org/bitbake
-branch: krogoth
+branch: morty
 
 URI: git://git.openembedded.org/openembedded-core
 layers: meta
-branch: krogoth
+branch: morty
 
-URI: git://github.com/mozilla-japan/meta-browser.git
-branch: firefox-45.0esr
+URI: git://github.com/OSSystems/meta-browser.git
+branch: morty
 
 URI: git://git.yoctoproject.org/meta-cloud-services
 layers: meta-openstack
-branch: master
+branch: morty
 
 URI: git://github.com/facebook/openbmc.git
 branch: helium
 
 URI: git://git.openembedded.org/meta-openembedded
 layers: meta-gnome, meta-oe, meta-python
-branch: krogoth
+branch: morty
 
 URI: git://github.com/sarnold/meta-small-arm-extra.git
 branch: morty
@@ -90,39 +90,45 @@ Now, let see how to build the comodoo image for a RaspberryPi 3:
 2. sudo apt-get install autoconf2.13
 3. git clone git://git.yoctoproject.org/poky
 4. cd poky/
-5. git checkout -b krogoth origin/krogoth
-   git reset --hard e59717e80f6288410fa057e34233382bd327697a
+5. git checkout -b morty origin/morty
+   git reset --hard 924e576b8930fd2268d85f0b151e5f68a3c2afce
 6. git clone git://git.openembedded.org/meta-openembedded
    cd meta-openembedded/
-   git checkout -b krogoth origin/krogoth
-   git reset --hard 895b25b387cae428c38990f4d2747603ee9dc92d
+   git checkout -b morty origin/morty
+   git reset --hard fe5c83312de11e80b85680ef237f8acb04b4b26e
    cd ..
 7. git clone git://git.yoctoproject.org/meta-cloud-services
    cd meta-cloud-services/
+   git checkout -b morty origin/morty
    git reset --hard 6043a4a17dc5ca9080dac7789e38620b7b1aa372
    cd ..
 8. git clone git://github.com/sarnold/meta-small-arm-extra.git
    cd meta-small-arm-extra/
-   git reset --hard f0f64dcea0dfe5aafacb5b607002cc2acb6aa512
+   # NOTICE: You might need to checkout branch morty:
+   # git checkout -b morty origin/morty
+   git reset --hard fa0da66cd3e598df590b0bfdfe212e1458134a15
    cd ..
 9. git clone git://github.com/facebook/openbmc.git meta-openbmc
    cd meta-openbmc/
-   git reset --hard d92449abeadec00df6ddfec58a53a0969721dabe
+   git reset --hard 6f113cb3a8671794e36edec9500cdf45ccadea19
    cd ..
    # NOTICE: You have to provide the name of the folder
    # where to clone the repo
-10. git clone git://git.yoctoproject.org/meta-raspberrypi
+10. git clone git@github.com:comodoo/meta-raspberrypi.git
     cd meta-raspberrypi/
-    git reset --hard cc64d6324d1543f009f0c010d720e74b7cb9f5d5
+    git checkout -b morty origin/morty
+    git reset --hard 598dd38a9684168663a859b1c471302b21f57510
     cd ..
-11. git clone git://github.com/mozilla-japan/meta-browser.git
+11. git clone git://github.com/OSSystems/meta-browser.git
     cd meta-browser/
-    git reset --hard 14199ac070905b101e7bb0919748986c33374649
+    git checkout -b morty origin/morty
+    git reset --hard 7d37ae2adec5cc5ea27367ce125bc7bce2310ca1
     cd ..
-    # NOTICE: You might need to checkout branch firefox-45.0esr:
-    # git checkout -b firefox-45.0esr origin/firefox-45.0esr
 12. git clone git@github.com:comodoo/meta-comodoo.git
     # Or git clone git://github.com/comodoo/meta-comodoo.git
+    cd meta-comodoo/
+    git checkout -b morty origin/morty
+    cd ..
 13. source oe-init-build-env
 14. cd conf/
 15. nano bblayers.conf
@@ -188,28 +194,28 @@ BBMASK_append = " \
 ========================
 
 ```
-BB_VERSION        = "1.30.0"
+BB_VERSION        = "1.32.0"
 BUILD_SYS         = "x86_64-linux"
 NATIVELSBSTRING   = "Ubuntu-16.04"
 TARGET_SYS        = "arm-poky-linux-gnueabi"
 MACHINE           = "raspberrypi3"
 DISTRO            = "poky"
-DISTRO_VERSION    = "2.1.2"
+DISTRO_VERSION    = "2.2.1"
 TUNE_FEATURES     = "arm armv7ve vfp thumb neon vfpv4 callconvention-hard cortexa7"
 TARGET_FPU        = "hard"
 meta
 meta-poky
-meta-yocto-bsp    = "krogoth:e59717e80f6288410fa057e34233382bd327697a"
-meta-browser      = "firefox-45.0esr:14199ac070905b101e7bb0919748986c33374649"
-meta-openstack    = "master:6043a4a17dc5ca9080dac7789e38620b7b1aa372"
+meta-yocto-bsp    = "morty:924e576b8930fd2268d85f0b151e5f68a3c2afce"
+meta-browser      = "morty:7d37ae2adec5cc5ea27367ce125bc7bce2310ca1"
+meta-openstack    = "morty:6043a4a17dc5ca9080dac7789e38620b7b1aa372"
 meta-comodoo
-meta-rpi-fixed-fb = "master:7b68e806acf7686b0129b60f1b824478bddd9d66"
-meta-openbmc      = "helium:d92449abeadec00df6ddfec58a53a0969721dabe"
+meta-rpi-fixed-fb = "morty:0f98d2bf569a7799aa4da4d24847dda7deed2f62"
+meta-openbmc      = "helium:6f113cb3a8671794e36edec9500cdf45ccadea19"
 meta-gnome
 meta-oe
-meta-python       = "krogoth:895b25b387cae428c38990f4d2747603ee9dc92d"
-meta-raspberrypi  = "master:cc64d6324d1543f009f0c010d720e74b7cb9f5d5"
-meta-small-arm-extra = "morty:f0f64dcea0dfe5aafacb5b607002cc2acb6aa512"
+meta-python       = "morty:fe5c83312de11e80b85680ef237f8acb04b4b26e"
+meta-raspberrypi  = "morty:598dd38a9684168663a859b1c471302b21f57510"
+meta-small-arm-extra = "morty:fa0da66cd3e598df590b0bfdfe212e1458134a15"
 ```
 
 (3) Build an image for Rpi3 & 'Eleduino 7.0 Inch 1024x600 Touch Screen' with VNC support
@@ -246,28 +252,28 @@ BBLAYERS ?= " \
 ========================
 
 ```
-BB_VERSION        = "1.30.0"
+BB_VERSION        = "1.32.0"
 BUILD_SYS         = "x86_64-linux"
 NATIVELSBSTRING   = "Ubuntu-16.04"
 TARGET_SYS        = "arm-poky-linux-gnueabi"
 MACHINE           = "raspberrypi3"
 DISTRO            = "poky"
-DISTRO_VERSION    = "2.1.2"
+DISTRO_VERSION    = "2.2.1"
 TUNE_FEATURES     = "arm armv7ve vfp thumb neon vfpv4 callconvention-hard cortexa7"
 TARGET_FPU        = "hard"
 meta
 meta-poky
-meta-yocto-bsp    = "krogoth:e59717e80f6288410fa057e34233382bd327697a"
-meta-browser      = "firefox-45.0esr:14199ac070905b101e7bb0919748986c33374649"
-meta-openstack    = "master:6043a4a17dc5ca9080dac7789e38620b7b1aa372"
+meta-yocto-bsp    = "morty:924e576b8930fd2268d85f0b151e5f68a3c2afce"
+meta-browser      = "morty:7d37ae2adec5cc5ea27367ce125bc7bce2310ca1"
+meta-openstack    = "morty:6043a4a17dc5ca9080dac7789e38620b7b1aa372"
 meta-comodoo
-meta-rpi-eleduino-7inch-1024x600 = "master:7b68e806acf7686b0129b60f1b824478bddd9d66"
-meta-openbmc      = "helium:d92449abeadec00df6ddfec58a53a0969721dabe"
+meta-rpi-eleduino-7inch-1024x600 = "morty:0f98d2bf569a7799aa4da4d24847dda7deed2f62"
+meta-openbmc      = "helium:6f113cb3a8671794e36edec9500cdf45ccadea19"
 meta-gnome
 meta-oe
-meta-python       = "krogoth:895b25b387cae428c38990f4d2747603ee9dc92d"
-meta-raspberrypi  = "master:cc64d6324d1543f009f0c010d720e74b7cb9f5d5"
-meta-small-arm-extra = "morty:f0f64dcea0dfe5aafacb5b607002cc2acb6aa512"
+meta-python       = "morty:fe5c83312de11e80b85680ef237f8acb04b4b26e"
+meta-raspberrypi  = "morty:598dd38a9684168663a859b1c471302b21f57510"
+meta-small-arm-extra = "morty:fa0da66cd3e598df590b0bfdfe212e1458134a15"
 ```
 
 (4) HOWTO launch the kiosk
@@ -295,7 +301,7 @@ in your host computer. From this point on, all the steps are the same.
 (5) Know issues during WIFI configuration
 =========================================
 
-* WIFI is disconnected or the decive lost connection for a short
+* WIFI is disconnected or the device lost connection for a short
   period of time:
   It should reconnect on its own but it does not. I am afraid this
   is a WIP so, until we fix this problem, you have to reboot your
