@@ -88,8 +88,6 @@ Now, let see how to build the comodoo image for a RaspberryPi 3:
    # WARNING: Essentials packages for Ubuntu, check yours
    # in the following link [1]
 2. sudo apt-get install autoconf2.13
-   sudo apt-get install mozilla-devscripts
-   # NOTICE: Required by a couple of recipes
 3. git clone git://git.yoctoproject.org/poky
 4. cd poky/
 5. git checkout -b krogoth origin/krogoth
@@ -205,7 +203,7 @@ meta-yocto-bsp    = "krogoth:e59717e80f6288410fa057e34233382bd327697a"
 meta-browser      = "firefox-45.0esr:14199ac070905b101e7bb0919748986c33374649"
 meta-openstack    = "master:6043a4a17dc5ca9080dac7789e38620b7b1aa372"
 meta-comodoo
-meta-rpi-fixed-fb = "master:4f2ae753f1790011ec2089f6b1f2929639615e46"
+meta-rpi-fixed-fb = "master:7b68e806acf7686b0129b60f1b824478bddd9d66"
 meta-openbmc      = "helium:d92449abeadec00df6ddfec58a53a0969721dabe"
 meta-gnome
 meta-oe
@@ -263,7 +261,7 @@ meta-yocto-bsp    = "krogoth:e59717e80f6288410fa057e34233382bd327697a"
 meta-browser      = "firefox-45.0esr:14199ac070905b101e7bb0919748986c33374649"
 meta-openstack    = "master:6043a4a17dc5ca9080dac7789e38620b7b1aa372"
 meta-comodoo
-meta-rpi-eleduino-7inch-1024x600 = "master:4f2ae753f1790011ec2089f6b1f2929639615e46"
+meta-rpi-eleduino-7inch-1024x600 = "master:7b68e806acf7686b0129b60f1b824478bddd9d66"
 meta-openbmc      = "helium:d92449abeadec00df6ddfec58a53a0969721dabe"
 meta-gnome
 meta-oe

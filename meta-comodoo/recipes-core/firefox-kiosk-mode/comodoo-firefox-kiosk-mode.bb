@@ -1,7 +1,7 @@
 require comodoo-firefox-addon-rkiosk.inc
 
-PV = "20170321"
-PR = "r5"
+PV = "20170402"
+PR = "r6"
 
 PREFS_JS = "prefs.js"
 EXTENSIONS_JSON = "extensions.json"

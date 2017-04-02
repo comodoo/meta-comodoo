@@ -5,14 +5,12 @@ HOMEPAGE = "https://addons.mozilla.org/en-US/firefox/addon/r-kiosk/"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=4d92cd373abda3937c2bc47fbc49d690"
 
-DEPENDS = "mozilla-devscripts-native"
-
 RKIOSK_XPI = "r_kiosk-0.9.0-fx.xpi"
 SRC_URI = "file://${RKIOSK_XPI}"
 
 do_unpack() {
     rm -fr ${S}
-    xpi-unpack ${THISDIR}/${PN}/${RKIOSK_XPI} ${S}
+    unzip ${THISDIR}/${PN}/${RKIOSK_XPI} -d ${S}
 }
 
 FIREFOX_DIRNAME = "firefox-45.3.0"
