@@ -106,11 +106,11 @@ Now, let see how to build the comodoo image for a RaspberryPi 3:
    cd meta-small-arm-extra/
    # NOTICE: You might need to checkout branch morty:
    # git checkout -b morty origin/morty
-   git reset --hard fa0da66cd3e598df590b0bfdfe212e1458134a15
+   git reset --hard c58f45cdf886f61fb245a0c7465427ce367ccd4a
    cd ..
 9. git clone git://github.com/facebook/openbmc.git meta-openbmc
    cd meta-openbmc/
-   git reset --hard 6f113cb3a8671794e36edec9500cdf45ccadea19
+   git reset --hard c65142813e5be8d3ae78378559f32c41d3b088d0
    cd ..
    # NOTICE: You have to provide the name of the folder
    # where to clone the repo
@@ -196,26 +196,26 @@ BBMASK_append = " \
 ```
 BB_VERSION        = "1.32.0"
 BUILD_SYS         = "x86_64-linux"
-NATIVELSBSTRING   = "Ubuntu-16.04"
+NATIVELSBSTRING   = "universal"
 TARGET_SYS        = "arm-poky-linux-gnueabi"
 MACHINE           = "raspberrypi3"
 DISTRO            = "poky"
 DISTRO_VERSION    = "2.2.1"
 TUNE_FEATURES     = "arm armv7ve vfp thumb neon vfpv4 callconvention-hard cortexa7"
 TARGET_FPU        = "hard"
-meta
-meta-poky
+meta              
+meta-poky         
 meta-yocto-bsp    = "morty:924e576b8930fd2268d85f0b151e5f68a3c2afce"
 meta-browser      = "morty:7d37ae2adec5cc5ea27367ce125bc7bce2310ca1"
 meta-openstack    = "morty:6043a4a17dc5ca9080dac7789e38620b7b1aa372"
-meta-comodoo
-meta-rpi-fixed-fb = "morty:0f98d2bf569a7799aa4da4d24847dda7deed2f62"
-meta-openbmc      = "helium:6f113cb3a8671794e36edec9500cdf45ccadea19"
-meta-gnome
-meta-oe
+meta-comodoo      
+meta-rpi-fixed-fb = "morty:dcdd8a73dbcf86d02bdf7e555bf10d5947f934ff"
+meta-openbmc      = "helium:c65142813e5be8d3ae78378559f32c41d3b088d0"
+meta-gnome        
+meta-oe           
 meta-python       = "morty:fe5c83312de11e80b85680ef237f8acb04b4b26e"
 meta-raspberrypi  = "morty:598dd38a9684168663a859b1c471302b21f57510"
-meta-small-arm-extra = "morty:fa0da66cd3e598df590b0bfdfe212e1458134a15"
+meta-small-arm-extra = "morty:c58f45cdf886f61fb245a0c7465427ce367ccd4a"
 ```
 
 (3) Build an image for Rpi3 & 'Eleduino 7.0 Inch 1024x600 Touch Screen' with VNC support
@@ -254,26 +254,26 @@ BBLAYERS ?= " \
 ```
 BB_VERSION        = "1.32.0"
 BUILD_SYS         = "x86_64-linux"
-NATIVELSBSTRING   = "Ubuntu-16.04"
+NATIVELSBSTRING   = "universal"
 TARGET_SYS        = "arm-poky-linux-gnueabi"
 MACHINE           = "raspberrypi3"
 DISTRO            = "poky"
 DISTRO_VERSION    = "2.2.1"
 TUNE_FEATURES     = "arm armv7ve vfp thumb neon vfpv4 callconvention-hard cortexa7"
 TARGET_FPU        = "hard"
-meta
-meta-poky
+meta              
+meta-poky         
 meta-yocto-bsp    = "morty:924e576b8930fd2268d85f0b151e5f68a3c2afce"
 meta-browser      = "morty:7d37ae2adec5cc5ea27367ce125bc7bce2310ca1"
 meta-openstack    = "morty:6043a4a17dc5ca9080dac7789e38620b7b1aa372"
-meta-comodoo
-meta-rpi-eleduino-7inch-1024x600 = "morty:0f98d2bf569a7799aa4da4d24847dda7deed2f62"
-meta-openbmc      = "helium:6f113cb3a8671794e36edec9500cdf45ccadea19"
-meta-gnome
-meta-oe
+meta-comodoo      
+meta-rpi-eleduino-7inch-1024x600 = "morty:dcdd8a73dbcf86d02bdf7e555bf10d5947f934ff"
+meta-openbmc      = "helium:c65142813e5be8d3ae78378559f32c41d3b088d0"
+meta-gnome        
+meta-oe           
 meta-python       = "morty:fe5c83312de11e80b85680ef237f8acb04b4b26e"
 meta-raspberrypi  = "morty:598dd38a9684168663a859b1c471302b21f57510"
-meta-small-arm-extra = "morty:fa0da66cd3e598df590b0bfdfe212e1458134a15"
+meta-small-arm-extra = "morty:c58f45cdf886f61fb245a0c7465427ce367ccd4a"
 ```
 
 (4) HOWTO launch the kiosk
