@@ -33,4 +33,5 @@ FILES_${PN} += " \
 RDEPENDS_${PN} += " \
   bash \
   python \
+  python-argparse \
   "

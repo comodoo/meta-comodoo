@@ -43,5 +43,6 @@ FILES_${PN} += " \
 
 RDEPENDS_${PN} += " \
     python \
+    python-argparse \
     firefox \
     "
