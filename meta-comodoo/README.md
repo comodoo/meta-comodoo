@@ -117,7 +117,7 @@ Now, let see how to build the comodoo image for a RaspberryPi 3:
 10. git clone git@github.com:comodoo/meta-raspberrypi.git
     cd meta-raspberrypi/
     git checkout -b morty origin/morty
-    git reset --hard 598dd38a9684168663a859b1c471302b21f57510
+    git reset --hard 29322720e11f4e62b2768b6c115f4ac86df76607
     cd ..
 11. git clone git://github.com/OSSystems/meta-browser.git
     cd meta-browser/
@@ -209,13 +209,14 @@ meta-yocto-bsp    = "morty:924e576b8930fd2268d85f0b151e5f68a3c2afce"
 meta-browser      = "morty:7d37ae2adec5cc5ea27367ce125bc7bce2310ca1"
 meta-openstack    = "morty:6043a4a17dc5ca9080dac7789e38620b7b1aa372"
 meta-comodoo      
-meta-rpi-fixed-fb = "morty:dcdd8a73dbcf86d02bdf7e555bf10d5947f934ff"
+meta-rpi-fixed-fb = "morty:102f94a7ae8da1d03c886b41d26ff3ce096b3040"
 meta-openbmc      = "helium:c65142813e5be8d3ae78378559f32c41d3b088d0"
 meta-gnome        
 meta-oe           
 meta-python       = "morty:fe5c83312de11e80b85680ef237f8acb04b4b26e"
-meta-raspberrypi  = "morty:598dd38a9684168663a859b1c471302b21f57510"
+meta-raspberrypi  = "morty:29322720e11f4e62b2768b6c115f4ac86df76607"
 meta-small-arm-extra = "morty:c58f45cdf886f61fb245a0c7465427ce367ccd4a"
+
 ```
 
 (3) Build an image for Rpi3 & 'Eleduino 7.0 Inch 1024x600 Touch Screen' with VNC support
@@ -267,12 +268,12 @@ meta-yocto-bsp    = "morty:924e576b8930fd2268d85f0b151e5f68a3c2afce"
 meta-browser      = "morty:7d37ae2adec5cc5ea27367ce125bc7bce2310ca1"
 meta-openstack    = "morty:6043a4a17dc5ca9080dac7789e38620b7b1aa372"
 meta-comodoo      
-meta-rpi-eleduino-7inch-1024x600 = "morty:dcdd8a73dbcf86d02bdf7e555bf10d5947f934ff"
+meta-rpi-eleduino-7inch-1024x600 = "morty:102f94a7ae8da1d03c886b41d26ff3ce096b3040"
 meta-openbmc      = "helium:c65142813e5be8d3ae78378559f32c41d3b088d0"
 meta-gnome        
 meta-oe           
 meta-python       = "morty:fe5c83312de11e80b85680ef237f8acb04b4b26e"
-meta-raspberrypi  = "morty:598dd38a9684168663a859b1c471302b21f57510"
+meta-raspberrypi  = "morty:29322720e11f4e62b2768b6c115f4ac86df76607"
 meta-small-arm-extra = "morty:c58f45cdf886f61fb245a0c7465427ce367ccd4a"
 ```
 
