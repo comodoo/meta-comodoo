@@ -1,6 +1,4 @@
-require comodoo-image-core.bb
-
-IMAGE_FEATURES_append = " ssh-server-dropbear"
+require comodoo-image-x11.bb
 
 IMAGE_INSTALL_append = " \
     comodoo-firefox-kiosk-mode \
