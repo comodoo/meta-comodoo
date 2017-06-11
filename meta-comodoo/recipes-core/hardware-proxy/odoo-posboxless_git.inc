@@ -1,8 +1,8 @@
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=4d92cd373abda3937c2bc47fbc49d690"
 
-SRC_URI = "git://github.com/odoo/odoo.git;protocol=git;branch=9.0"
-SRCREV = "1a0d173b9af787a4acc515f153e3d5d78f358487"
+SRC_URI = "git://github.com/odoo/odoo.git;protocol=git;branch=10.0"
+SRCREV = "5952c394e5e917a6a5f9c0780dd23198c26fbef3"
 
 S = "${WORKDIR}/git"
 
@@ -18,25 +18,14 @@ do_install() {
 
     install -d ${ODOO_ADDONS_DIR}
 
-    cp -R --preserve=mode -v ${ADDONS_DIR}/web ${ODOO_ADDONS_DIR}
-    cp -R --preserve=mode -v ${ADDONS_DIR}/web_kanban ${ODOO_ADDONS_DIR}
-
     cp -R --preserve=mode -v ${ADDONS_DIR}/hw_escpos ${ODOO_ADDONS_DIR}
-    cp -R --preserve=mode -v ${ADDONS_DIR}/hw_posbox_homepage ${ODOO_ADDONS_DIR}
     cp -R --preserve=mode -v ${ADDONS_DIR}/hw_proxy ${ODOO_ADDONS_DIR}
     cp -R --preserve=mode -v ${ADDONS_DIR}/hw_scale ${ODOO_ADDONS_DIR}
     cp -R --preserve=mode -v ${ADDONS_DIR}/hw_scanner ${ODOO_ADDONS_DIR}
 
-    POSBOX_DIR=${ADDONS_DIR}/point_of_sale/tools/posbox
-    ODOO_POSBOX_DIR=${D}${ODOO_SRCDIR}/${POSBOX_DIR}
+    cp -R --preserve=mode -v odoo ${D}${ODOO_SRCDIR}
 
-    install -d ${ODOO_POSBOX_DIR}
-
-    cp -R --preserve=mode -v ${POSBOX_DIR}/configuration ${ODOO_POSBOX_DIR}
-
-    cp -R --preserve=mode -v openerp ${D}${ODOO_SRCDIR}
-
-    cp --preserve=mode -v odoo.py ${D}${ODOO_SRCDIR}
+    cp --preserve=mode -v odoo-bin ${D}${ODOO_SRCDIR}
 
     chown root:root -R ${D}${ODOO_SRCDIR}
 }
@@ -44,21 +33,18 @@ do_install() {
 FILES_${PN} += " ${ODOO_SRCDIR}"
 
 RDEPENDS_${PN} += " \
-    postgresql \
-    postgresql-client \
     python \
     python-babel \
     python-dateutil \
     python-decorator \
-    python-docutils \
     python-evdev \
     python-imaging \
     python-jinja2 \
     python-lxml \
     python-mako \
     python-passlib \
-    python-psycopg2 \
     python-psutil \
+    python-psycopg2 \
     python-pychart \
     python-pyserial \
     python-pytz \

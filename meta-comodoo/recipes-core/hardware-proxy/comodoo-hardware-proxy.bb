@@ -1,7 +1,7 @@
 require odoo-posboxless_git.inc
 
-PV = "20161024"
-PR = "r4"
+PV = "20170611"
+PR = "r5"
 
 COMODOO-HW-PROXY_SH = "comodoo-hardware-proxy.sh"
 SRC_URI_append = " \
