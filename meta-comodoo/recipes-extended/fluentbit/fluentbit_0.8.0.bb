@@ -17,10 +17,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=2ee41112a44fe7014dce33e26468ba93"
 DEPENDS = "zlib"
 INSANE_SKIP_${PN}-dev += "dev-elf"
 
-inherit cmake
-
-COMODOO_DIR = "/opt/comodoo"
-COMODOO_ETCDIR = "${COMODOO_DIR}/etc"
+inherit cmake comodoo-install-dir
 
 do_install_append() {
     install -d ${D}${COMODOO_ETCDIR}
@@ -31,4 +28,3 @@ do_install_append() {
 FILES_${PN} += " \
     ${COMODOO_ETCDIR}/${FLUENT-BIT_CONF} \
     "
-

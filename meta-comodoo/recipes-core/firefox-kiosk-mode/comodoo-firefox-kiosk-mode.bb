@@ -1,7 +1,9 @@
+inherit comodoo-install-dir
+
 require comodoo-firefox-addon-rkiosk.inc
 
-PV = "20170402"
-PR = "r7"
+PV = "20170619"
+PR = "r8"
 
 PREFS_JS = "prefs.js"
 EXTENSIONS_JSON = "extensions.json"
@@ -18,9 +20,6 @@ do_unpack_append() {
     cp ${THISDIR}/${PN}/${COMODOO-KIOSK_PY} ${WORKDIR}/
 }
 
-COMODOO_DIR = "/opt/comodoo"
-COMODOO_BINDIR = "${COMODOO_DIR}/bin"
-COMODOO_DATADIR = "${COMODOO_DIR}/share"
 COMODOO_FIREFOX_DATADIR = "${COMODOO_DATADIR}/${FIREFOX_DIRNAME}"
 
 do_install_append() {

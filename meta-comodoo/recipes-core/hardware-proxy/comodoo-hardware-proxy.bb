@@ -1,16 +1,15 @@
+inherit comodoo-install-dir
+
 require odoo-posboxless_git.inc
 
-PV = "20170611"
-PR = "r5"
+PV = "20170619"
+PR = "r6"
 
 COMODOO-HW-PROXY_SH = "comodoo-hardware-proxy.sh"
 SRC_URI_append = " \
     file://${COMODOO-HW-PROXY_SH} \
     file://0001-Use-a-narrower-filter-to-detect-barcode-scanners.patch \
     "
-
-COMODOO_DIR = "/opt/comodoo"
-COMODOO_BINDIR = "${COMODOO_DIR}/bin"
 
 do_install_append() {
     install -d ${D}${COMODOO_BINDIR}

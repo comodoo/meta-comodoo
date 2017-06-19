@@ -1,8 +1,10 @@
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=4d92cd373abda3937c2bc47fbc49d690"
 
-PV = "20170532"
-PR = "r4"
+inherit comodoo-install-dir
+
+PV = "20170619"
+PR = "r5"
 
 COMODOO-POS_PY = "comodoo-pos.py"
 COMODOO-PROFILE = "profile"
@@ -11,9 +13,6 @@ SRC_URI = "file://${COMODOO-POS_PY} \
            file://${COMODOO-PROFILE} \
            file://${COMODOO-XINITRC} \
           "
-
-COMODOO_DIR = "/opt/comodoo"
-COMODOO_BINDIR = "${COMODOO_DIR}/bin"
 
 COMODOO_PROFILE_DIR = "${sysconfdir}"
 COMODOO_XINITRC_DIR = "${sysconfdir}/X11/xinit"
