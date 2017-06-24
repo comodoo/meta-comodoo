@@ -91,11 +91,11 @@ Now, let see how to build the comodoo image for a RaspberryPi 3:
 3. git clone git://git.yoctoproject.org/poky
 4. cd poky/
 5. git checkout -b morty origin/morty
-   git reset --hard 924e576b8930fd2268d85f0b151e5f68a3c2afce
+   git reset --hard b4cf48ecee9e2c0fd4aad96911aecd1b805cfa5a
 6. git clone git://git.openembedded.org/meta-openembedded
    cd meta-openembedded/
    git checkout -b morty origin/morty
-   git reset --hard fe5c83312de11e80b85680ef237f8acb04b4b26e
+   git reset --hard 2810af5ad51d48758f462648992cb46106245f0c
    cd ..
 7. git clone git://git.yoctoproject.org/meta-cloud-services
    cd meta-cloud-services/
@@ -106,23 +106,23 @@ Now, let see how to build the comodoo image for a RaspberryPi 3:
    cd meta-small-arm-extra/
    # NOTICE: You might need to checkout branch morty:
    # git checkout -b morty origin/morty
-   git reset --hard c58f45cdf886f61fb245a0c7465427ce367ccd4a
+   git reset --hard 656c651b74e66b04a16c39f8463a9ba670516459
    cd ..
 9. git clone git://github.com/facebook/openbmc.git meta-openbmc
    cd meta-openbmc/
-   git reset --hard c65142813e5be8d3ae78378559f32c41d3b088d0
+   git reset --hard fe11ab3ffb115ebb9eb3cb0dc2f53de6dc346220
    cd ..
    # NOTICE: You have to provide the name of the folder
    # where to clone the repo
-10. git clone git@github.com:comodoo/meta-raspberrypi.git
+10. git clone git://git.yoctoproject.org/meta-raspberrypi
     cd meta-raspberrypi/
     git checkout -b morty origin/morty
-    git reset --hard 29322720e11f4e62b2768b6c115f4ac86df76607
+    git reset --hard 380bf2ff445c2049bdea15f3bb36e8cb36540345
     cd ..
 11. git clone git://github.com/OSSystems/meta-browser.git
     cd meta-browser/
     git checkout -b morty origin/morty
-    git reset --hard 7d37ae2adec5cc5ea27367ce125bc7bce2310ca1
+    git reset --hard ee0d264347ca89efe73788a11f31504d1d42b716
     cd ..
 12. git clone git@github.com:comodoo/meta-comodoo.git
     # Or git clone git://github.com/comodoo/meta-comodoo.git
@@ -152,11 +152,6 @@ BBLAYERS ?= " \
 16. nano local.conf
     # Add following line to the end of the file:
 MACHINE ?= "raspberrypi3"
-
-PREFERRED_PROVIDER_virtual/libgl = "mesa"
-PREFERRED_PROVIDER_virtual/libgles2 = "mesa"
-PREFERRED_PROVIDER_virtual/egl = "mesa"
-PREFERRED_PROVIDER_virtual/mesa = "mesa"
 
 BBMASK_append = " \
     /meta-cloud-services/meta-openstack/recipes-connectivity/ \
@@ -200,23 +195,22 @@ NATIVELSBSTRING   = "universal"
 TARGET_SYS        = "arm-poky-linux-gnueabi"
 MACHINE           = "raspberrypi3"
 DISTRO            = "poky"
-DISTRO_VERSION    = "2.2.1"
+DISTRO_VERSION    = "2.2.2"
 TUNE_FEATURES     = "arm armv7ve vfp thumb neon vfpv4 callconvention-hard cortexa7"
 TARGET_FPU        = "hard"
 meta              
 meta-poky         
-meta-yocto-bsp    = "morty:924e576b8930fd2268d85f0b151e5f68a3c2afce"
-meta-browser      = "morty:7d37ae2adec5cc5ea27367ce125bc7bce2310ca1"
+meta-yocto-bsp    = "morty:b4cf48ecee9e2c0fd4aad96911aecd1b805cfa5a"
+meta-browser      = "morty:ee0d264347ca89efe73788a11f31504d1d42b716"
 meta-openstack    = "morty:6043a4a17dc5ca9080dac7789e38620b7b1aa372"
 meta-comodoo      
-meta-rpi-fixed-fb = "morty:102f94a7ae8da1d03c886b41d26ff3ce096b3040"
-meta-openbmc      = "helium:c65142813e5be8d3ae78378559f32c41d3b088d0"
+meta-rpi-fixed-fb = "morty:db191fc373820ac49f88379f62b07f776cc5250a"
+meta-openbmc      = "helium:fe11ab3ffb115ebb9eb3cb0dc2f53de6dc346220"
 meta-gnome        
 meta-oe           
-meta-python       = "morty:fe5c83312de11e80b85680ef237f8acb04b4b26e"
-meta-raspberrypi  = "morty:29322720e11f4e62b2768b6c115f4ac86df76607"
-meta-small-arm-extra = "morty:c58f45cdf886f61fb245a0c7465427ce367ccd4a"
-
+meta-python       = "morty:2810af5ad51d48758f462648992cb46106245f0c"
+meta-raspberrypi  = "morty:380bf2ff445c2049bdea15f3bb36e8cb36540345"
+meta-small-arm-extra = "morty:656c651b74e66b04a16c39f8463a9ba670516459"
 ```
 
 (3) Build an image for Rpi3 & 'Eleduino 7.0 Inch 1024x600 Touch Screen' with VNC support
@@ -259,22 +253,22 @@ NATIVELSBSTRING   = "universal"
 TARGET_SYS        = "arm-poky-linux-gnueabi"
 MACHINE           = "raspberrypi3"
 DISTRO            = "poky"
-DISTRO_VERSION    = "2.2.1"
+DISTRO_VERSION    = "2.2.2"
 TUNE_FEATURES     = "arm armv7ve vfp thumb neon vfpv4 callconvention-hard cortexa7"
 TARGET_FPU        = "hard"
 meta              
 meta-poky         
-meta-yocto-bsp    = "morty:924e576b8930fd2268d85f0b151e5f68a3c2afce"
-meta-browser      = "morty:7d37ae2adec5cc5ea27367ce125bc7bce2310ca1"
+meta-yocto-bsp    = "morty:b4cf48ecee9e2c0fd4aad96911aecd1b805cfa5a"
+meta-browser      = "morty:ee0d264347ca89efe73788a11f31504d1d42b716"
 meta-openstack    = "morty:6043a4a17dc5ca9080dac7789e38620b7b1aa372"
 meta-comodoo      
-meta-rpi-eleduino-7inch-1024x600 = "morty:102f94a7ae8da1d03c886b41d26ff3ce096b3040"
-meta-openbmc      = "helium:c65142813e5be8d3ae78378559f32c41d3b088d0"
+meta-rpi-eleduino-7inch-1024x600 = "morty:db191fc373820ac49f88379f62b07f776cc5250a"
+meta-openbmc      = "helium:fe11ab3ffb115ebb9eb3cb0dc2f53de6dc346220"
 meta-gnome        
 meta-oe           
-meta-python       = "morty:fe5c83312de11e80b85680ef237f8acb04b4b26e"
-meta-raspberrypi  = "morty:29322720e11f4e62b2768b6c115f4ac86df76607"
-meta-small-arm-extra = "morty:c58f45cdf886f61fb245a0c7465427ce367ccd4a"
+meta-python       = "morty:2810af5ad51d48758f462648992cb46106245f0c"
+meta-raspberrypi  = "morty:380bf2ff445c2049bdea15f3bb36e8cb36540345"
+meta-small-arm-extra = "morty:656c651b74e66b04a16c39f8463a9ba670516459"
 ```
 
 (4) HOWTO launch the kiosk
